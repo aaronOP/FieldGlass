@@ -9,15 +9,14 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainHome extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //this is the big one
+        setContentView(R.layout.activity_main_home);
 
-        //Initialize and assign variable
+        //Initilise and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         //set home selected
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.dashboard:
                         startActivity(new Intent(getApplicationContext()
-                                , Dashboard.class));
+                                , MainHome.class));
                         overridePendingTransition(0, 0 );
                         return true;
 
@@ -46,7 +45,5 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
 }
