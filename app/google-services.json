@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1057063490873",
+    "firebase_url": "https://fieldglass-a6a48.firebaseio.com",
+    "project_id": "fieldglass-a6a48",
+    "storage_bucket": "fieldglass-a6a48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057063490873:android:928dd4ca3ca8c9f1da04e8",
+        "android_client_info": {
+          "package_name": "com.example.fieldglass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057063490873-tq546b2nmdk7tpqo16ngks1935ho6h2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fieldglass",
+            "certificate_hash": "b209a8f2da5bfc001bb8d7b65db4717575799c02"
+          }
+        },
+        {
+          "client_id": "1057063490873-6f3s3nod88vdr3k3r1kli5tqhrfdejbu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2ks2MgtyU_9xyNC_ALtncI43sTQ3BzEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057063490873-6f3s3nod88vdr3k3r1kli5tqhrfdejbu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
