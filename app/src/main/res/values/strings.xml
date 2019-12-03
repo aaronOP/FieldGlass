@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">FieldGlass</string>
+    <string name="title_text">Self. Gratitude. Journal</string>
+    <string name="greateful_text">Show me thre way</string>
+    <string name="get_started_text">Get Started</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_text">Login</string>
+    <string name="or_text">or</string>
+    <string name="create_text">Create Account</string>
+    <string name="username_hint">Username</string>
 </resources>

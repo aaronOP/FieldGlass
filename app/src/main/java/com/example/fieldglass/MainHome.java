@@ -16,7 +16,7 @@ public class MainHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
 
-        //Initilise and assign variable
+        //Initailize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         //set home selected
@@ -47,3 +47,4 @@ public class MainHome extends AppCompatActivity {
         });
     }
 }
+

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fieldglass">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".About"></activity>
+        <activity android:name=".PostJournalActivity"></activity>
+        <activity android:name=".CreateAccount" />
+        <activity android:name=".Primary" />
+        <activity android:name=".SignIn" />
+        <activity android:name=".Login" />
+        <activity android:name=".About" />
         <activity android:name=".Dashboard" />
         <activity android:name=".MainHome" />
         <activity android:name=".MainActivity">
@@ -19,6 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
