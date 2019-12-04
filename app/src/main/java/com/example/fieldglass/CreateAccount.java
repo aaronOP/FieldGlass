@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import utilities.DetailsApi;
+
 public class CreateAccount extends AppCompatActivity {
     private Button loginButton;
     private Button createAccButton;
@@ -137,7 +139,11 @@ public class CreateAccount extends AppCompatActivity {
                                                                     String name = task.getResult()
                                                                             .getString("username");
 
-                                                                    //if successfull move to the next page
+                                                                    DetailsApi detailsApi = DetailsApi.getInstance(); //global api
+                                                                    detailsApi.setUsername(name);
+                                                                    detailsApi.setUserId(currentUserId);
+
+                                                                    //if successful move to the next page
 
                                                                     Intent intent = new Intent(CreateAccount.this,
                                                                             PostJournalActivity.class);
