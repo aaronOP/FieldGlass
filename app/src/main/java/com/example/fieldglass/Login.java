@@ -38,6 +38,7 @@ public class Login extends AppCompatActivity {
     //username and password from xml
     private AutoCompleteTextView emailAddress;
     private EditText password;
+    private ProgressBar progressBar;
 
     //firebase instance varibiaes
     private FirebaseAuth firebaseAuth;
@@ -53,6 +54,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progressBar = findViewById(R.id.login_Progress);
 
 
         firebaseAuth = firebaseAuth.getInstance();
@@ -83,6 +85,10 @@ public class Login extends AppCompatActivity {
             }
 
     private void loginEmailPasswordUser(String email, String pwd) {
+
+        //progressbar
+        progressBar.setVisibility(View.VISIBLE);
+
         if (!TextUtils.isEmpty(email)
             && !TextUtils.isEmpty(pwd)) {
             firebaseAuth.signInWithEmailAndPassword(email,pwd)
@@ -105,6 +111,9 @@ public class Login extends AppCompatActivity {
                                             //Global Api can be used to call userId + username
                                             assert queryDocumentSnapshots != null;
                                             if (!queryDocumentSnapshots.isEmpty()){
+
+                                                //progressbar
+                                                progressBar.setVisibility(View.INVISIBLE);
                                                 for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots){
                                                     DetailsApi detailsApi = DetailsApi.getInstance();
                                                     detailsApi.setUsername(snapshot.getString("username"));
@@ -112,7 +121,7 @@ public class Login extends AppCompatActivity {
 
                                                     //Go to list activity
                                                     startActivity(new Intent(Login.this,
-                                                            MainHome.class));
+                                                            MainActivity.class));
                                                 }
 
                                             }
@@ -124,11 +133,15 @@ public class Login extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            //progressbar
+                            progressBar.setVisibility(View.INVISIBLE);
 
                         }
                     });
 
         }else{
+            //progressbar
+            progressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(Login.this,
                     "Please enter a username and password!",
             Toast.LENGTH_LONG)

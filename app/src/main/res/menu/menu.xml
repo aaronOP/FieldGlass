@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/about_log"
+        android:icon="@drawable/ic_more_horiz_black_24dp"
+        android:title="@string/title"
+        app:showAsAction="ifRoom"
+        ></item>
+
+    <item
+        android:id="@+id/Action_Log_Out"
+        android:title="@string/signout"
+        app:showAsAction="never"
+        ></item>
+
+</menu>

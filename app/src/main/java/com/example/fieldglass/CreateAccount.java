@@ -146,7 +146,7 @@ public class CreateAccount extends AppCompatActivity {
                                                                     //if successful navigate to main homepage
 
                                                                     Intent intent = new Intent(CreateAccount.this,
-                                                                            MainHome.class);
+                                                                            MainActivity.class);
                                                                     intent.putExtra("username", name);
                                                                     intent.putExtra("USerId", currentUserId);
                                                                     startActivity(intent);

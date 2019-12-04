@@ -9,4 +9,6 @@
     <string name="or_text">or</string>
     <string name="create_text">Create Account</string>
     <string name="username_hint">Username</string>
+    <string name="title">Menu</string>
+    <string name="signout">Log Out</string>
 </resources>

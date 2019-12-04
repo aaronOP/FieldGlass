@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Progress"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -9,12 +10,12 @@
     android:padding="16dp"
     tools:context=".Primary">
 
-    <!--only show on login button click
+    <!--only show on login button click-->
     <ProgressBar
         android:id="@+id/login_Progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone" /> -->
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/email_login_form"
@@ -68,8 +69,6 @@
         android:text="@string/create_text"
         android:textColor="#A20C0C"
         android:textStyle="bold" />
-
-
 
 
 </LinearLayout>

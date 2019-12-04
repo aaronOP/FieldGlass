@@ -34,7 +34,7 @@ public class Dashboard extends AppCompatActivity {
 
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext()
-                                , MainHome.class));
+                                , MainActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.about:

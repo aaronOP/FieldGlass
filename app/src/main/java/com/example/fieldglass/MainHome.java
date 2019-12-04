@@ -29,7 +29,7 @@ public class MainHome extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.dashboard:
                         startActivity(new Intent(getApplicationContext()
-                                , MainHome.class));
+                                , Dashboard.class));
                         overridePendingTransition(0, 0 );
                         return true;
 
