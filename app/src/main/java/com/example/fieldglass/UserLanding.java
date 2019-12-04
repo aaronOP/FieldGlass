@@ -6,17 +6,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Dashboard extends AppCompatActivity {
+
+public class UserLanding extends AppCompatActivity {
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser user;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //private StorageReference storageReference;
 
     @Override
-        protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_user_landing);
+
+        firebaseAuth = FirebaseAuth.getInstance() ;{
+            user = firebaseAuth.getCurrentUser();
+
 
         //Initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -34,7 +48,7 @@ public class Dashboard extends AppCompatActivity {
 
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext()
-                                , MainHome.class));
+                                , Login.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.about:
@@ -50,7 +64,7 @@ public class Dashboard extends AppCompatActivity {
 
 
 
+    };
     }
 }
-
 

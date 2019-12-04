@@ -54,6 +54,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         firebaseAuth = firebaseAuth.getInstance();
 
         emailAddress = findViewById(R.id.email);
@@ -111,7 +112,7 @@ public class Login extends AppCompatActivity {
 
                                                     //Go to list activity
                                                     startActivity(new Intent(Login.this,
-                                                            PostJournalActivity.class));
+                                                            MainHome.class));
                                                 }
 
                                             }

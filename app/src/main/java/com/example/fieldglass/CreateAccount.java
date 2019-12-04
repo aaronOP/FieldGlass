@@ -143,16 +143,13 @@ public class CreateAccount extends AppCompatActivity {
                                                                     detailsApi.setUsername(name);
                                                                     detailsApi.setUserId(currentUserId);
 
-                                                                    //if successful move to the next page
+                                                                    //if successful navigate to main homepage
 
                                                                     Intent intent = new Intent(CreateAccount.this,
-                                                                            PostJournalActivity.class);
+                                                                            MainHome.class);
                                                                     intent.putExtra("username", name);
                                                                     intent.putExtra("USerId", currentUserId);
                                                                     startActivity(intent);
-
-
-
 
                                                                 }else {
                                                                     progressBar.setVisibility(View.INVISIBLE);
