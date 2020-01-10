@@ -17,6 +17,13 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/imageLogin"
+        android:layout_width="259dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="70dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
     <LinearLayout
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
@@ -32,6 +39,7 @@
         android:inputType="textEmailAddress"
         android:maxLines="1" />
 
+    <!--Password input-->
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
@@ -42,6 +50,7 @@
         android:maxLines="1"
         android:paddingTop="5dp" />
 
+    <!--Sign in button-->
     <Button
         android:id="@+id/email_sign_in_button"
         android:layout_width="match_parent"
@@ -51,9 +60,10 @@
         android:textColor="#4CAF50"
         android:textStyle="bold" />
 
+    <!--"Or"-->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="18dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
@@ -61,6 +71,7 @@
         android:textSize="18dp"
         android:textStyle="bold" />
 
+    <!--create account button-->
     <Button
         android:id="@+id/create_acc_button_login"
         android:layout_width="match_parent"
@@ -69,7 +80,6 @@
         android:text="@string/create_text"
         android:textColor="#A20C0C"
         android:textStyle="bold" />
-
 
 </LinearLayout>
 

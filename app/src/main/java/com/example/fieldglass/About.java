@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +18,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 
 public class About extends AppCompatActivity {
+    //declare update form details
+    String FarmName, Address;
+    int Phone;
+
+    //Declare edit text fields
+    EditText FarmNameInput;
+    EditText AddressInput;
+    EditText PhoneInput;
+
+   //Declare reset and Save buttons
+    Button saveBtn;
+    Button resetBtn;
+
+    //declare button for logout
     Button button;
 
     //Fire base auth
@@ -30,6 +46,24 @@ public class About extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        //initilise edit text fields
+        FarmNameInput = (EditText) findViewById(R.id.FarmName);
+        AddressInput = (EditText) findViewById(R.id.Address);
+        PhoneInput = (EditText) findViewById(R.id.Phone);
+
+        resetBtn = (Button) findViewById(R.id.ResetBtn);
+        saveBtn = (Button) findViewById(R.id.SaveBtn);
+
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Address = AddressInput.getText().toString();
+                FarmName = FarmNameInput.getText().toString();
+                Phone = Integer.valueOf(PhoneInput.getText().toString());
+            }
+        });
+
 
         //find logout button
         button = (Button) findViewById(R.id.LogoutBtn);
@@ -51,10 +85,10 @@ public class About extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-        //Initilise and assign variable
+        //Initialise and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        //set home selected
+        //set about selected
         bottomNavigationView.setSelectedItemId(R.id.about);
 
         //perform ItemSelectedListener

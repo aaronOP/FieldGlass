@@ -79,6 +79,7 @@ public class CreateAccount extends AppCompatActivity {
             }
         }
     };
+        //on click convert text to string
     createAccButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -86,6 +87,7 @@ public class CreateAccount extends AppCompatActivity {
                 && !TextUtils.isEmpty(passwordEditText.getText().toString())
                 && !TextUtils.isEmpty(userNameEditText.getText().toString())) {
 
+                //.trim to remove trailing or leading spaces
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 String username = userNameEditText.getText().toString().trim();
@@ -96,7 +98,6 @@ public class CreateAccount extends AppCompatActivity {
                         Toast.LENGTH_LONG)
                         .show();
             }
-
         }
     });
     }
@@ -107,19 +108,19 @@ public class CreateAccount extends AppCompatActivity {
             &&!TextUtils.isEmpty(username)) {
 
             progressBar.setVisibility(View.VISIBLE);
-
+            //create record
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                //take user to home own dashboard
+                                //take user to home ActivityMain
                                 currentUser = firebaseAuth.getCurrentUser();
                                 //assert currentUser != null;
                                 final String currentUserId = currentUser.getUid();
 
                                 //user map allows creation of user in user collection create user map to create  profile content
-                                //by here user is created hence user ID
+                                //by here user is created hence user ID can be gathered
 
                                 Map<String, String> userObj = new HashMap<>();
                                 userObj.put("userId", currentUserId);
@@ -143,22 +144,18 @@ public class CreateAccount extends AppCompatActivity {
                                                                     detailsApi.setUsername(name);
                                                                     detailsApi.setUserId(currentUserId);
 
-                                                                    //if successful navigate to main homepage
-
+                                                                    //if successful navigate to main landing page "MainActivity"
                                                                     Intent intent = new Intent(CreateAccount.this,
-                                                                            MainActivity.class);
+                                                                            MainHome.class);
                                                                     intent.putExtra("username", name);
                                                                     intent.putExtra("USerId", currentUserId);
                                                                     startActivity(intent);
 
                                                                 }else {
                                                                     progressBar.setVisibility(View.INVISIBLE);
-
                                                                 }
-
                                                             }
                                                         });
-
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -168,8 +165,6 @@ public class CreateAccount extends AppCompatActivity {
                                             }
                                         });
                             }
-
-
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -187,7 +182,7 @@ public class CreateAccount extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-// on start to check if user is signed in
+        // on start to check if user is signed in
         currentUser = firebaseAuth.getCurrentUser();
         firebaseAuth.addAuthStateListener(authStateListener);
 

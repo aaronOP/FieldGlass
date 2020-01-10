@@ -27,9 +27,9 @@ public class MainHome extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.dashboard:
+                    case R.id.maps:
                         startActivity(new Intent(getApplicationContext()
-                                , Dashboard.class));
+                                , MapsActivity.class));
                         overridePendingTransition(0, 0 );
                         return true;
 

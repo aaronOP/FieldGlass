@@ -40,12 +40,12 @@ public class Login extends AppCompatActivity {
     private EditText password;
     private ProgressBar progressBar;
 
-    //firebase instance varibiaes
+    //fire base instance variables
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
 
-    //
+    //set firebase
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Users");
 
@@ -54,18 +54,16 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //retrieve from .xml file
         progressBar = findViewById(R.id.login_Progress);
-
-
         firebaseAuth = firebaseAuth.getInstance();
-
         emailAddress = findViewById(R.id.email);
         password = findViewById(R.id.password);
-
-
         loginButton = findViewById(R.id.email_sign_in_button);
         createAccButton = findViewById(R.id.create_acc_button_login);
 
+        //create account button activity
         createAccButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,20 +71,19 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //login button activity
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginEmailPasswordUser(emailAddress.getText().toString().trim(),
                         password.getText().toString().trim());
-
             }
         });
-
             }
 
     private void loginEmailPasswordUser(String email, String pwd) {
 
-        //progressbar
+        //progressbar visible on click
         progressBar.setVisibility(View.VISIBLE);
 
         if (!TextUtils.isEmpty(email)
