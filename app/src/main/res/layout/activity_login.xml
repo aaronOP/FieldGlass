@@ -5,6 +5,7 @@
     android:id="@+id/Progress"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/greenback"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
@@ -16,13 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/imageLogin"
-        android:layout_width="259dp"
-        android:layout_height="130dp"
-        android:layout_marginBottom="70dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <LinearLayout
         android:id="@+id/email_login_form"
@@ -63,7 +57,7 @@
     <!--"Or"-->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="18dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"

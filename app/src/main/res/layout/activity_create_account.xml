@@ -4,6 +4,7 @@
     android:gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@drawable/greenback"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -59,6 +60,26 @@
         android:background="@android:color/transparent"
         android:text="@string/create_text"
         android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+
+        android:gravity="center_horizontal"
+        android:text="@string/or_login"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/login2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:text="@string/login_text"
+        android:textColor="#4CAF50"
         android:textStyle="bold" />
 
 </LinearLayout>

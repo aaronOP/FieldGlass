@@ -6,9 +6,9 @@
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="login_text">Login</string>
-    <string name="or_text">or</string>
+    <string name="or_text">Don\'t have an account? </string>
     <string name="create_text">Create Account</string>
-    <string name="username_hint">Username</string>
+    <string name="username_hint">Name</string>
     <string name="title">Menu</string>
     <string name="signout">Log Out</string>
     <string name="home">Home</string>
@@ -16,4 +16,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="LaunchLogin">Login</string>
     <string name="LaunchCreate">Create Account</string>
+    <string name="or_login">Already have an account?</string>
 </resources>
