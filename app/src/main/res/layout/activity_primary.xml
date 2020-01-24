@@ -9,16 +9,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="18dp"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:background="@drawable/launch1">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="172dp"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/roboto_bold"
         android:text="FieldGlass"
-        android:textSize="30sp" />
+        android:textColor="#080908"
+        android:textSize="50sp" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -29,6 +31,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="90dp"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="8dp">
 
             <TextView
@@ -38,23 +41,13 @@
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:text="A GJA Product"
-                android:textSize="19sp"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
                 android:textStyle="italic" />
 
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#00A28888"
-        android:shadowColor="#00F07D7D"
-        android:text="@string/get_started_text"
-        android:textColor="#2AC726"
-        android:textStyle="bold" />
 
     <ProgressBar
         android:id="@+id/login_Progress"
@@ -62,6 +55,18 @@
         android:layout_height="67dp"
         android:layout_marginTop="25dp"
         android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_marginTop="20dp"
+        android:background="#00A28888"
+        android:shadowColor="#00F07D7D"
+        android:text="@string/LaunchLogin"
+        android:textColor="#76FF03"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
 

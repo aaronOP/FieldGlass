@@ -14,4 +14,6 @@
     <string name="home">Home</string>
     <string name="your_details">Your Details</string>
     <string name="title_activity_maps">Map</string>
+    <string name="LaunchLogin">Login</string>
+    <string name="LaunchCreate">Create Account</string>
 </resources>

@@ -23,10 +23,8 @@ public class Primary extends AppCompatActivity {
                 startActivity(new Intent(Primary.this,
                         Login.class));
 
+                }
             }
-                                            }
         );
-
-
     }
 }
