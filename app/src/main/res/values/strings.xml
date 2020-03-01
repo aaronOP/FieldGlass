@@ -17,4 +17,8 @@
     <string name="LaunchLogin">Login</string>
     <string name="LaunchCreate">Create Account</string>
     <string name="or_login">Already have an account?</string>
+    <string name="address_hint">Address</string>
+    <string name="city_hint">City/Town</string>
+    <string name="post_hint">Post Code</string>
+    <string name="phone_hint">Phone No</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
+import android.location.Address;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -44,11 +45,17 @@ public class CreateAccount extends AppCompatActivity {
 
     //add users to collection in fire store
     private CollectionReference collectionReference = db.collection("Users");
-
     private EditText emailEditText;
     private EditText passwordEditText;
     private ProgressBar progressBar;
     private EditText userNameEditText;
+
+    //    new details
+    private EditText addressEditText;
+    private EditText cityEditText;
+    private EditText postEditText;
+    private EditText phoneEditText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,11 @@ public class CreateAccount extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password_acc);
         emailEditText = findViewById(R.id.email_account);
         userNameEditText = findViewById(R.id.username_acc);
+//        new details
+        addressEditText = findViewById(R.id.Address_account);
+        cityEditText = findViewById(R.id.city_account);
+        postEditText = findViewById(R.id.post_account);
+        phoneEditText = findViewById(R.id.phone_account);
 
 //create auth listen to pick up change in user login activity
 
@@ -85,13 +97,24 @@ public class CreateAccount extends AppCompatActivity {
         public void onClick(View v) {
             if (!TextUtils.isEmpty(emailEditText.getText().toString())
                 && !TextUtils.isEmpty(passwordEditText.getText().toString())
-                && !TextUtils.isEmpty(userNameEditText.getText().toString())) {
+                && !TextUtils.isEmpty(userNameEditText.getText().toString())
+//                    new details
+                && !TextUtils.isEmpty(addressEditText.getText().toString())
+                && !TextUtils.isEmpty(cityEditText.getText().toString())
+                && !TextUtils.isEmpty(postEditText.getText().toString())
+                && !TextUtils.isEmpty(phoneEditText.getText().toString())){
 
                 //.trim to remove trailing or leading spaces
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 String username = userNameEditText.getText().toString().trim();
-                createUserEmailAccount(email, password, username);
+//                new details
+                String address = addressEditText.getText().toString().trim();
+                String city = cityEditText.getText().toString().trim();
+                String post = postEditText.getText().toString().trim();
+                String phone = phoneEditText.getText().toString().trim();
+
+                createUserEmailAccount(email, password, username, address, city, post, phone);
             }else{//prevent empty entry
                 Toast.makeText(CreateAccount.this,
                         "Empty Fields Not Allowed",
@@ -102,10 +125,14 @@ public class CreateAccount extends AppCompatActivity {
     });
     }
 
-    private void createUserEmailAccount(String email, String password, final String username){
+    private void createUserEmailAccount(final String email, String password, final String username, final String address, final String city, final String post, final String phone){
         if (!TextUtils.isEmpty(email)
             &&!TextUtils.isEmpty(password)
-            &&!TextUtils.isEmpty(username)) {
+            &&!TextUtils.isEmpty(username)
+            &&!TextUtils.isEmpty(address)
+            &&!TextUtils.isEmpty(city)
+            &&!TextUtils.isEmpty(post)
+            &&!TextUtils.isEmpty(phone)) {
 
             progressBar.setVisibility(View.VISIBLE);
             //create record
@@ -125,6 +152,11 @@ public class CreateAccount extends AppCompatActivity {
                                 Map<String, String> userObj = new HashMap<>();
                                 userObj.put("userId", currentUserId);
                                 userObj.put("username", username);
+                                userObj.put("address", address);
+                                userObj.put("city", city );
+                                userObj.put("email", email);
+                                userObj.put("post", post);
+                                userObj.put("phone", phone);
 
                                 //save to fire store db
                                 collectionReference.add(userObj)
