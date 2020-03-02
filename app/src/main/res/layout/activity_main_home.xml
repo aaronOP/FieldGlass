@@ -1,115 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainHome">
 
-    <LinearLayout
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Hometoolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#444947"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/displayHome"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:outlineAmbientShadowColor="@android:color/background_dark"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cost Estimator"
-            android:textAlignment="center"
-            android:textColor="#4CAF50"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Acres" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="123"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="235dp"
-            android:layout_height="wrap_content"
-            android:text="Services (select where appropriate)" />
-
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mow" />
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ted(kick out)" />
-
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rake" />
-
-        <CheckBox
-            android:id="@+id/checkBox4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bale" />
-
-        <CheckBox
-            android:id="@+id/checkBox5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Wrap" />
-
-        <CheckBox
-            android:id="@+id/checkBox6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Stack" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Calculate" />
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Total Cost £"
-            android:inputType="textPersonName" />
-
-
-    </LinearLayout>
-
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Home"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Hometoolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/bottom_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         app:itemBackground="@android:color/holo_green_dark"
-        app:itemTextColor="@drawable/selector"
         app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu_navigation"
-        android:layout_alignParentBottom="true"/>
+        app:itemTextColor="@drawable/selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigation" />
 
 
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
