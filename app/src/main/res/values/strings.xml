@@ -21,4 +21,6 @@
     <string name="city_hint">City/Town</string>
     <string name="post_hint">Post Code</string>
     <string name="phone_hint">Phone No</string>
+    <string name="logout">Logout</string>
+    <string name="profile_icon">profile Icon</string>
 </resources>
