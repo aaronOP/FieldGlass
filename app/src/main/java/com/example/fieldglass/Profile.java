@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
 public class Profile extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -12,3 +16,4 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
     }
 }
+

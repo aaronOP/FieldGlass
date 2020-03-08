@@ -23,4 +23,7 @@
     <string name="phone_hint">Phone No</string>
     <string name="logout">Logout</string>
     <string name="profile_icon">profile Icon</string>
+    <string name="town">Town</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="save">Save</string>
 </resources>
