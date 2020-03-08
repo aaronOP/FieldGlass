@@ -38,6 +38,12 @@ public class About extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
+
+    public void profileClicked(View view ) {
+        Intent intent = new Intent(About.this, Profile.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
