@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Profile"
+        android:text="@string/profile"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -36,12 +36,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        app:cardBackgroundColor="#00686464"
+        app:cardBackgroundColor="#00ACA5A5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/AboutToolbar">
 
         <LinearLayout
             android:id="@+id/cardProfile"
@@ -58,11 +58,23 @@
                 android:hint="@string/username_hint"
                 android:includeFontPadding="false" />
 
+            <EditText
+                android:id="@+id/nameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
             <TextView
                 android:id="@+id/txtadd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address_hint" />
+
+            <EditText
+                android:id="@+id/addressInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/txtTown"
@@ -70,11 +82,23 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/city_hint" />
 
+            <EditText
+                android:id="@+id/townInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
             <TextView
                 android:id="@+id/txtPost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/post_hint" />
+
+            <EditText
+                android:id="@+id/postInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/txtPhone"
@@ -82,30 +106,27 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/phone_hint" />
 
+            <EditText
+                android:id="@+id/phoneInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
             <TextView
                 android:id="@+id/txtemail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email_hint" />
 
-            <TextView
-                android:id="@+id/txtpass"
+            <EditText
+                android:id="@+id/emailInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password_hint" />
+                android:inputType="text" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AboutToolbar"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -115,45 +136,32 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
+                <Button
+                    android:id="@+id/btnDelete"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="116dp"
+                    android:background="#E53935"
+                    android:text="@string/delete_account"
+                    android:textColor="#F4F5F2" />
 
-                    <Button
-                        android:id="@+id/btnDelete"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="116dp"
-                        android:background="#E53935"
-                        android:text="@string/delete_account"
-                        android:textColor="#F4F5F2" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
+                <Button
+                    android:id="@+id/btnSave"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" >
+                    android:layout_height="wrap_content"
+                    android:background="#43A047"
+                    android:text="@string/save"
+                    android:textColor="#FCFBFB" />
+            </androidx.cardview.widget.CardView>
 
-                    <Button
-                        android:id="@+id/btnSave"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#43A047"
-                        android:text="@string/save"
-                        android:textColor="#FCFBFB" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

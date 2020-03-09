@@ -26,4 +26,5 @@
     <string name="town">Town</string>
     <string name="delete_account">Delete Account</string>
     <string name="save">Save</string>
+    <string name="profile">Profile</string>
 </resources>
