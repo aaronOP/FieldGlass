@@ -44,6 +44,13 @@ public class About extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void pricesClicked(View view ) {
+        Intent intent = new Intent(About.this, Prices.class);
+        startActivity(intent);
+        Toast.makeText(About.this, "Prices Clicked",
+                Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

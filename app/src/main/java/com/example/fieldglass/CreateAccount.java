@@ -193,6 +193,7 @@ public class CreateAccount extends AppCompatActivity {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(CreateAccount.this, "Try Again", Toast.LENGTH_SHORT).show();
 
                                             }
                                         });
@@ -202,7 +203,8 @@ public class CreateAccount extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            Toast.makeText(CreateAccount.this, "Users Exists", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     });
 
