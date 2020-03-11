@@ -4,15 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,28 +17,22 @@ public class PriceListAdapter extends ArrayAdapter<Price> {
 
     private static final String TAG = "PriceListAdapter";
     private Context mContext;
-    int mResource;
+    private int mResource;
+    private int lastPosition;
 
     //Default constructor for price list adapter
-    private static class ViewHolder {
+    //Holds variables in a view
+    static class ViewHolder {
         TextView service;
         TextView cost;
         TextView per;
     }
 
-    /**
-     * Default constructor for the PriceListAdapter
-     * @param context
-     * @param resource
-     * @param objects
-     */
-
-
     public PriceListAdapter(Context context, int resource, ArrayList<Price> objects) {
         super(context, resource,objects);
         mContext = context;
         mResource = resource;
-}
+    }
 
     @NonNull
     @Override
@@ -54,17 +45,42 @@ public class PriceListAdapter extends ArrayAdapter<Price> {
         //Create the service object with the information
         Price price = new Price(service,cost,per);
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource, parent, false);
+        //Create view result for showing  the animation
+        final View result;
 
-        //Set text views
-        TextView tvService = convertView.findViewById(R.id.textView1);
-        TextView tvCost =  convertView.findViewById(R.id.textView2);
-        TextView tvPer = convertView.findViewById(R.id.textView3);
+        //view holder object
+        ViewHolder holder;
 
-        tvService.setText(service);
-        tvCost.setText(cost);
-        tvPer.setText(per);
+        if(convertView == null){
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            convertView = inflater.inflate(mResource, parent, false);
+
+            holder = new ViewHolder();
+            //Set text views
+            holder.service = (TextView) convertView.findViewById(R.id.textView1);
+            holder.cost = (TextView) convertView.findViewById(R.id.textView2);
+            holder.per = (TextView) convertView.findViewById(R.id.textView3);
+
+            result = convertView;
+            convertView.setTag(holder);
+        }
+        else{
+            holder =  (ViewHolder) convertView.getTag();
+            result = convertView;
+        }
+
+        //Declare animation
+        //if position is greater than last position, then use animation laod down, if not use load up.
+        Animation animation = AnimationUtils.loadAnimation(mContext,
+                (position > lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
+        result.startAnimation(animation);
+        lastPosition = position;
+
+        //Set text to parameters
+        holder.service.setText(price.getService());
+        holder.cost.setText(price.getCost());
+        holder.per.setText(price.getPer());
+
 
         return  convertView;
 
