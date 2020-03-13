@@ -66,6 +66,8 @@ public class About extends AppCompatActivity {
                 //log out
                 if (user !=null && firebaseAuth!= null ) {
                     firebaseAuth.signOut();
+                    //Wipe global variable
+                    global.loggedInID = null;
 
                     startActivity(new Intent(About.this,
                             Primary.class));

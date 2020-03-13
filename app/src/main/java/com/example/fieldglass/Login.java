@@ -40,10 +40,12 @@ public class Login extends AppCompatActivity {
     private EditText password;
     private ProgressBar progressBar;
 
-    //fire base instance variables
+    //Declare Firebase instance variables
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
+
 
     //set firebase
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -79,7 +81,16 @@ public class Login extends AppCompatActivity {
                         password.getText().toString().trim());
             }
         });
-            }
+
+    }
+
+
+
+
+
+
+
+
 
     private void loginEmailPasswordUser(String email, String pwd) {
 

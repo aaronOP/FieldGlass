@@ -7,7 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Primary extends AppCompatActivity {
+
+    //Declare Firebase instance variables
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
+
+
+    //set firebase
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button getStartedButton;
 
     @Override
@@ -15,6 +29,26 @@ public class Primary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primary);
         getStartedButton = findViewById(R.id.startButton);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        //Check if current user session running
+        try{
+            FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
+            global.loggedInID = user.getUid();
+        }
+
+        catch (Exception e){
+            //No user session on firebase, user must sign in
+        }
+
+        if (global.loggedInID  == null){
+            //No User Logged In
+        }
+        else{
+            startActivity(new Intent(Primary.this,
+                    MainHome.class));
+        }
 
         getStartedButton.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -77,7 +77,7 @@ public class Prices extends AppCompatActivity {
         priceList.add(dumper);
         priceList.add(tractorhire);
         priceList.add(_________);
-        
+
 
 
         //create Price list adapter
