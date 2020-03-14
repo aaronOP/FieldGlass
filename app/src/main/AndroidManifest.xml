@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Prices"></activity>
+        <activity android:name=".New_Service"></activity>
+        <activity android:name=".Prices" />
         <activity android:name=".Profile" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
