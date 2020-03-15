@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".New_Service"></activity>
+        <activity android:name=".Comment"></activity>
+        <activity android:name=".New_Service" />
         <activity android:name=".Prices" />
         <activity android:name=".Profile" />
         <!--
