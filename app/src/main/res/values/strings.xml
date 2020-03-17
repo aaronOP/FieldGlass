@@ -43,4 +43,10 @@
     <string name="add_start_date">+ Add Start Date</string>
     <string name="tap_to_add_a_comment">Tap to Add a comment...</string>
     <string name="note">Note</string>
+    <string name="calendar">Calendar</string>
+    <string name="weather">Weather</string>
+    <string name="calender">CALENDER</string>
+    <string name="find">Find</string>
+    <string name="enter_nearest_town">Enter Nearest Town</string>
+    <string name="weathertxt">Weather</string>
 </resources>

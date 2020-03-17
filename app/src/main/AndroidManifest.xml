@@ -19,7 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Comment"></activity>
+        <activity android:name=".WeatherApp"></activity>
+        <activity android:name=".Maps" />
+        <activity android:name=".Calendar" />
+        <activity android:name=".Comment" />
         <activity android:name=".New_Service" />
         <activity android:name=".Prices" />
         <activity android:name=".Profile" />

@@ -65,8 +65,10 @@
                 android:textAllCaps="true"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteX="63dp"
-                tools:layout_editor_absoluteY="72dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -317,7 +319,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="CALENDER"
+                                android:text="@string/calender"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="#FFFFFF"
@@ -339,6 +341,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
+                        android:onClick="weatherClicked"
                         app:cardBackgroundColor="#6fb98f"
                         app:cardCornerRadius="25dp"
                         app:contentPadding="6dp">
@@ -352,7 +355,7 @@
                                 android:id="@+id/txtann"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Announcement"
+                                android:text="@string/weather"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="#FFFFFF"
@@ -364,7 +367,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Announcement Icon"
-                                app:srcCompat="@drawable/ic_announcement" />
+                                app:srcCompat="@drawable/ic_cloud" />
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>

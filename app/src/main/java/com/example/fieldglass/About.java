@@ -2,14 +2,12 @@ package com.example.fieldglass;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -48,6 +46,13 @@ public class About extends AppCompatActivity {
         Intent intent = new Intent(About.this, Prices.class);
         startActivity(intent);
         Toast.makeText(About.this, "Prices Clicked",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    public void weatherClicked(View view ) {
+        Intent intent = new Intent(About.this, WeatherApp.class);
+        startActivity(intent);
+        Toast.makeText(About.this, "WeatherApp Clicked",
                 Toast.LENGTH_SHORT).show();
     }
 
