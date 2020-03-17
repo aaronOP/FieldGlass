@@ -49,4 +49,7 @@
     <string name="find">Find</string>
     <string name="enter_nearest_town">Enter Nearest Town</string>
     <string name="weathertxt">Weather</string>
+    <string name="select_service">Select Service</string>
+    <string name="mowing">Mowing</string>
+    <string name="bale_and_wrap">Bale and Wrap</string>
 </resources>

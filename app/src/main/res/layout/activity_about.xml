@@ -47,15 +47,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="@drawable/gradientbg"
         android:onClick="cardviewClicked"
-        app:cardBackgroundColor="#272727"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AboutToolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:background="@drawable/greenback">
 
             <TextView
                 android:id="@+id/textView6"
@@ -63,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="Weather Updates"
                 android:textAllCaps="true"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -136,6 +137,7 @@
                                 android:layout_marginEnd="2dp"
                                 android:layout_marginBottom="2dp"
                                 android:contentDescription="@string/profile_icon"
+                                android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_account" />
                         </LinearLayout>
 
@@ -171,6 +173,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Folder icon"
+                                android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_folder" />
                         </LinearLayout>
 
@@ -234,6 +237,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Money Icon"
+                                android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_money" />
                         </LinearLayout>
 
@@ -269,6 +273,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Calculator Icon"
+                                android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_plus" />
                         </LinearLayout>
 
@@ -331,6 +336,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Money Icon"
+                                android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_calender" />
                         </LinearLayout>
 
@@ -367,6 +373,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Announcement Icon"
+                                android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_cloud" />
                         </LinearLayout>
 
@@ -429,6 +436,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Web Icon"
+                                android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_web" />
                         </LinearLayout>
 
@@ -464,6 +472,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:contentDescription="Settings Icon"
+                                android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_settings" />
                         </LinearLayout>
 
