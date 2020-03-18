@@ -9,7 +9,10 @@ public class global {
     //Orders
     public static String user_Service;
     public static String baleType;
-
+    public static String mow;
+    public static String ted;
+    public static String rake;
+    public static String stack;
 
 
     public static String user_Client;

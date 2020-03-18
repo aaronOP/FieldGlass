@@ -86,7 +86,6 @@
                     android:background="@null"
                     android:importantForAutofill="no"
                     android:inputType="text"
-                    android:onClick="onClick"
                     android:padding="12dp"
                     android:text="@string/add_a_service"
                     android:textColor="@color/ColorTextGreen" />
@@ -117,35 +116,6 @@
                     android:inputType="text"
                     android:padding="12dp"
                     android:text="@string/add_a_client"
-                    android:textColor="@color/ColorTextGreen" />
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/textView_Machines"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/machines"
-                android:textAllCaps="true"
-                android:textColor="@color/colorTextOrange" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardViewMachines"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <TextView
-                    android:id="@+id/tvMachines"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:padding="12dp"
-                    android:text="@string/add_machines"
                     android:textColor="@color/ColorTextGreen" />
 
             </androidx.cardview.widget.CardView>
@@ -230,12 +200,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:hint="@string/add_comment"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine|text"
                     android:maxLines="10"
                     android:padding="12dp"
                     android:scrollbars="none"
-                    android:text="@string/add_comment"
                     android:textColor="@color/ColorTextGreen"
                     android:textSize="18dp"
                     android:visibility="visible"

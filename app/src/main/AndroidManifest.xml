@@ -21,7 +21,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Select_Service"></activity>
         <activity android:name=".WeatherApp" />
-        <activity android:name=".Maps" />
         <activity android:name=".Calendar" />
         <activity android:name=".Comment" />
         <activity android:name=".New_Service" />

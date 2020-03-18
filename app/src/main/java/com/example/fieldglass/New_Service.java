@@ -14,16 +14,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 //new firebase import
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firestore.v1.Document;
 
 import org.w3c.dom.Text;
 
@@ -33,14 +41,21 @@ public class New_Service extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     //end
 
+    //Declare Firebase instance variables
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
+
+    FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
+
     private static final String TAG = "New_Service";
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    private TextView Service;
-    private TextView Client;
-    private TextView Machines;
-    private TextView Location;
-    private TextView Date;
+    private TextView tvTask;
+    private TextView tvClient;
+    private TextView tvAddress;
+    private TextView tvDate;
     private EditText Comment;
 
 
@@ -49,49 +64,68 @@ public class New_Service extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new__service);
 
-        //declare  them
-        //.settext of global variable.
+        //Client
+        db.collection("Users")
+                .whereEqualTo("userId", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String userName = document.getString("username");
+                                tvClient.setText(userName);
+                            }
+                        } else {
+                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        //Find
+        tvTask = findViewById(R.id.tvTask);
+        tvClient = findViewById(R.id.tvClient);
+        tvAddress = findViewById(R.id.tvAddress);
+        tvDate = findViewById(R.id.tvDate);
+        Comment = findViewById(R.id.Comment);
+
+        //Display Selections
+        if (global.baleType != "" && global.mow != "" && global.ted != "" && global.rake != "" && global.stack != "") {
+            //Don't change TextView
+            tvTask.setText("+ Add Service");
+        }
+        else{
+            //Change TextView
+            tvTask.setText(global.mow + "   " + global.ted + "   " + global.rake + "   "  + global.baleType + "   " + global.stack);
+        }
+
+
 
         //Floating action button to close new service
         FloatingActionButton fab = findViewById(R.id.fab_btn);
-
         fab.setOnClickListener(new View.OnClickListener() {
+
+            //save on close
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext()
-                        , MainHome.class));
-                //Save to Database
-
-                Map<String, Object> orders = new HashMap<>();
-                orders.put("service", global.user_Service);
-                orders.put("client", global.user_Client);
-                orders.put("machines", global.user_Machines);
-                orders.put("location", global.user_Location);
-                orders.put("Date", global.user_Date);
-                orders.put("Time", global.user_Time);
-                orders.put("comment",global.user_Comment);
-
-                if (global.user_Service == null){
+                if (tvTask.getText().toString().trim().equals("+ Add Service")|| (tvDate.getText().toString().trim().equals("+ Add Start Date"))){
                     //Check to ensure inputs are not empty
-                    Toast.makeText(New_Service.this, "Please Add a Service", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(New_Service.this, "Please Complete all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if (global.user_Client == null){
-                    return;
+                else{
+                    Toast.makeText(New_Service.this, "Service Accepted", Toast.LENGTH_SHORT).show();
                 }
-                else if (global.user_Machines == null){
-                    return;
-                }
-                else if (global.user_Location == null){
-                    return;
-                }
-                else if (global.user_Date == null){
-                    return;
-                }
-                else if (global.user_Time == null){
-                    return;
-                }
-                else {
+
+                //Save to Database
+                Map<String, Object> orders = new HashMap<>();
+                orders.put("service", tvTask.getText().toString().trim());
+                orders.put("client", tvClient.getText().toString().trim());
+                orders.put("location", tvAddress.getText().toString().trim());
+                orders.put("date", tvDate.getText().toString().trim());
+                orders.put("comment",Comment.getText().toString().trim());
+
                     db.collection("orders")
                             .add(orders)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -106,17 +140,14 @@ public class New_Service extends AppCompatActivity {
                                     Log.w(TAG, "Error adding document", e);
                                 }
                             });
-                }
 
+
+                startActivity(new Intent(getApplicationContext()
+                        , MainHome.class));
             }
         });
 
-        //Click tvtask to open Select_Service
-
-
-
-
-        mDisplayDate = (TextView) findViewById(R.id.tvDate);
+        mDisplayDate = findViewById(R.id.tvDate);
         //create calender object to get current day, month, year
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override

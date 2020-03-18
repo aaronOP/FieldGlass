@@ -48,8 +48,6 @@ public class Select_Service extends AppCompatActivity {
         radioGroupBale = findViewById(R.id.radioGroupBale);
         radioGroupStack = findViewById(R.id.radioGroupStack);
 
-
-
         //Floating action button to close new service
         FloatingActionButton fab = findViewById(R.id.saveFab_btn);
 
@@ -57,19 +55,48 @@ public class Select_Service extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (rbBaleSmall.isChecked()){
-                    global.baleType = "Small";
+                    global.baleType = "Small-Bales";
                 }
                 else if (rbBaleLarge.isChecked()){
-                    global.baleType = "Large";
+                    global.baleType = "Large-Bales";
+                }
+                else if (rbBaleWrap.isChecked()){
+                    global.baleType = "Wrapped-Bales";
+                }
+                else{
+                    global.baleType = "";
+                }
+                //Mowing
+                if (rbMowing.isChecked()) {
+                    global.mow = "Mowing";
                 }
                 else {
-                    global.baleType = "wrapped";
+                    global.mow = "";
                 }
-
+                //Ted
+                if (rbTedding.isChecked()) {
+                    global.ted = "Tedding";
+                }
+                else {
+                    global.ted = "";
+                }
+                //Rake
+                if (rbRaking.isChecked()) {
+                    global.rake = "Raking";
+                }
+                else {
+                    global.rake = "";
+                }
+                //Stack
+                if (rbStack.isChecked()) {
+                    global.stack = "Stacking";
+                }
+                else {
+                    global.stack = "";
+                }
 
                 startActivity(new Intent(getApplicationContext()
                         , New_Service.class));
-
 
             }
         });
