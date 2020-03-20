@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">FieldGlass</string>
-    <string name="title_text">Self. Gratitude. Journal</string>
     <string name="greateful_text">Show me thre way</string>
     <string name="get_started_text">Get Started</string>
     <string name="email_hint">Email</string>
@@ -52,4 +51,6 @@
     <string name="select_service">Select Service</string>
     <string name="mowing">Mowing</string>
     <string name="bale_and_wrap">Bale and Wrap</string>
+    <string name="acre">Acre Count</string>
+    <string name="to_do">To Do</string>
 </resources>

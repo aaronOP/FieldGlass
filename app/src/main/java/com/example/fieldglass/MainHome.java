@@ -42,8 +42,6 @@ public class MainHome extends AppCompatActivity {
         //Firebase User
         FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
 
-
-
         //Check User Role
         db.collection("Users")
                 .whereEqualTo("userId", user.getUid())
@@ -54,7 +52,7 @@ public class MainHome extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String role = document.getString("Role");
+                                String role = document.getString("role");
                                     global.user_role = role;
                                     //for user roles, in the on create set above line to visible for managers.
                                 Toast.makeText(MainHome.this, "User Role = " + global.user_role, Toast.LENGTH_SHORT).show();
@@ -65,7 +63,7 @@ public class MainHome extends AppCompatActivity {
                     }
                 });
 
-
+        //Create Service button
         FloatingActionButton fab = findViewById(R.id.fab_btn);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +76,8 @@ public class MainHome extends AppCompatActivity {
             }
         });
 
-        //Initialize and assign variable
+        //Bottom Nav
+        // Initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         //set home selected

@@ -145,15 +145,6 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="116dp"
-                    android:background="#E53935"
-                    android:text="@string/delete_account"
-                    android:textColor="#F4F5F2" />
-
-                <Button
                     android:id="@+id/btnSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

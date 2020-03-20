@@ -3,17 +3,20 @@ package com.example.fieldglass;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.example.fieldglass.adapter.PlaceAutoSuggestAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,13 +30,9 @@ import java.util.Map;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firestore.v1.Document;
-
-import org.w3c.dom.Text;
 
 public class New_Service extends AppCompatActivity {
 
@@ -57,12 +56,42 @@ public class New_Service extends AppCompatActivity {
     private TextView tvAddress;
     private TextView tvDate;
     private EditText Comment;
+    private EditText acre;
 
+    private Button btnMinus;
+    private Button btnAddition;
+    private EditText acreNum;
+    private String AcreValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new__service);
+
+        //Acre Counter
+        btnAddition = findViewById(R.id.btnAddition);
+        btnMinus = findViewById(R.id.btnMinus);
+        acreNum = findViewById(R.id.acreNum);
+
+        btnAddition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int new_acre = Integer.parseInt(acreNum.getText().toString().trim());
+                new_acre +=1;
+                acreNum.setText(String.valueOf(new_acre));
+            }
+        });
+
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int new_acre = Integer.parseInt(acreNum.getText().toString().trim());
+                new_acre -=1;
+                acreNum.setText(String.valueOf(new_acre));
+            }
+        });
+
+
 
         //Client
         db.collection("Users")
@@ -89,6 +118,7 @@ public class New_Service extends AppCompatActivity {
         tvAddress = findViewById(R.id.tvAddress);
         tvDate = findViewById(R.id.tvDate);
         Comment = findViewById(R.id.Comment);
+        acre = findViewById(R.id.acreNum);
 
         //Display Selections
         if (global.baleType != "" && global.mow != "" && global.ted != "" && global.rake != "" && global.stack != "") {
@@ -100,8 +130,6 @@ public class New_Service extends AppCompatActivity {
             tvTask.setText(global.mow + "   " + global.ted + "   " + global.rake + "   "  + global.baleType + "   " + global.stack);
         }
 
-
-
         //Floating action button to close new service
         FloatingActionButton fab = findViewById(R.id.fab_btn);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +137,7 @@ public class New_Service extends AppCompatActivity {
             //save on close
             @Override
             public void onClick(View v) {
-                if (tvTask.getText().toString().trim().equals("+ Add Service")|| (tvDate.getText().toString().trim().equals("+ Add Start Date"))){
+                if (tvTask.getText().toString().trim().equals("+ Add Service")|| (tvDate.getText().toString().trim().equals("+ Add Start Date"))|| (acre.getText().toString().trim().equals(""))){
                     //Check to ensure inputs are not empty
                     Toast.makeText(New_Service.this, "Please Complete all fields", Toast.LENGTH_SHORT).show();
                     return;
@@ -125,6 +153,7 @@ public class New_Service extends AppCompatActivity {
                 orders.put("location", tvAddress.getText().toString().trim());
                 orders.put("date", tvDate.getText().toString().trim());
                 orders.put("comment",Comment.getText().toString().trim());
+                orders.put("acre", acre.getText().toString().trim());
 
                     db.collection("orders")
                             .add(orders)
@@ -140,7 +169,6 @@ public class New_Service extends AppCompatActivity {
                                     Log.w(TAG, "Error adding document", e);
                                 }
                             });
-
 
                 startActivity(new Intent(getApplicationContext()
                         , MainHome.class));

@@ -123,6 +123,14 @@ public class CreateAccount extends AppCompatActivity {
             }
         }
     });
+    //Login Button to return to login page
+        Button button = (Button) findViewById(R.id.login2);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(CreateAccount.this, Login.class));
+            }
+        });
+
     }
 
     private void createUserEmailAccount(final String email, String password, final String username, final String address, final String city, final String post, final String phone){

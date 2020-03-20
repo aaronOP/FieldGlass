@@ -82,6 +82,7 @@ public class Profile extends AppCompatActivity {
                                 String dbPost = document.getString("post");
                                 String dbPhone =document.getString("phone");
                                 String dbEmail = document.getString("email");
+                                String dbRole = document.getString("role");
 
                                 //Show in edit text fields
                                 nameInput.setText(dbName);
@@ -93,6 +94,7 @@ public class Profile extends AppCompatActivity {
 
                                 //Save Doc id
                                 global.userDocID = document.getId();
+                                global.user_role = dbRole;
                             }
                         } else {
                             //Log.d(TAG, "Error getting documents: ", task.getException());
@@ -130,6 +132,8 @@ public class Profile extends AppCompatActivity {
         Users.put("phone", phone);
         Users.put("email",email);
         Users.put("userId", userid);
+        Users.put("role", global.user_role);
+
 
             db.collection("Users").document(global.userDocID)
             .set(Users)//merge options
