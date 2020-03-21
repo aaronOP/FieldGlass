@@ -1,9 +1,6 @@
 package com.example.fieldglass;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,23 +13,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.example.fieldglass.adapter.PlaceAutoSuggestAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-
-//new firebase import
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+//import com.example.fieldglass.adapter.PlaceAutoSuggestAdapter;
+//new firebase import
 
 public class New_Service extends AppCompatActivity {
 
@@ -150,6 +151,7 @@ public class New_Service extends AppCompatActivity {
                 Map<String, Object> orders = new HashMap<>();
                 orders.put("service", tvTask.getText().toString().trim());
                 orders.put("client", tvClient.getText().toString().trim());
+                orders.put("clientId", user.getUid());
                 orders.put("location", tvAddress.getText().toString().trim());
                 orders.put("date", tvDate.getText().toString().trim());
                 orders.put("comment",Comment.getText().toString().trim());

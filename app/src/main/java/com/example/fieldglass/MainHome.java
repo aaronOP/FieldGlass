@@ -1,14 +1,15 @@
 package com.example.fieldglass;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,11 +18,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainHome extends AppCompatActivity {
     //set firebase
@@ -32,12 +34,23 @@ public class MainHome extends AppCompatActivity {
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private CollectionReference collectionReference = db.collection("Users");
-
+    private RecyclerView recyclerView;
+    private FirebaseFirestore firestore;
+    private TaskItemRecyclerAdapter taskItemRecyclerAdapter;
+    private List<TaskItem> TaskItemList;
+    FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
+
+        //Recycler View
+        TaskItemList = new ArrayList<>();
+
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this ));
 
         //Firebase User
         FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
@@ -107,5 +120,32 @@ public class MainHome extends AppCompatActivity {
             }
         });
     }
-}
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        db.collection("orders")
+                .whereEqualTo("clientId", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                TaskItem taskItem = document.toObject(TaskItem.class);
+                                TaskItemList.add(taskItem);
+                            }
+
+                            taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
+                            recyclerView.setAdapter(taskItemRecyclerAdapter);
+                            taskItemRecyclerAdapter.notifyDataSetChanged();
+                        } else {
+                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+    }
+}
