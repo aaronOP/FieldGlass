@@ -1,23 +1,32 @@
 package com.example.fieldglass;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
 public class About extends AppCompatActivity {
+
+    //Nav Bar
+    public void homeActivity(View view){
+        startActivity(new Intent(About.this, MainHome.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
+    public void mapsActivity(View view){
+        startActivity(new Intent(About.this, Dashboard.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
 
 
     //declare button for logout
@@ -27,7 +36,7 @@ public class About extends AppCompatActivity {
     FirebaseAuth mAuth;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser user;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseFirestore db =  FirebaseFirestore.getInstance();
     private StorageReference storageReference;
 
@@ -61,6 +70,37 @@ public class About extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        //Get user city
+        db.collection("Users")
+                .whereEqualTo("userId", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                // retrieve data and store as strings
+                                String dbName = document.getString("username");
+                                String dbAddress = document.getString("address");
+                                String dbCity = document.getString("city");
+                                String dbPost = document.getString("post");
+                                String dbPhone =document.getString("phone");
+                                String dbEmail = document.getString("email");
+                                String dbRole = document.getString("role");
+
+                                //Save Doc id
+                                global.userDocID = document.getId();
+                                global.user_role = dbRole;
+                                global.city = dbCity;
+                                global.username = dbName;
+                            }
+                        } else {
+                        }
+                    }
+                });
+
+
 
         //find logout button
         button = (Button) findViewById(R.id.LogoutBtn);
@@ -83,35 +123,6 @@ public class About extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-        //Initialise and assign variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        //set about selected
-        bottomNavigationView.setSelectedItemId(R.id.about);
-
-        //perform ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.dashboard:
-                        startActivity(new Intent(getApplicationContext()
-                                , Dashboard.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext()
-                                , MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-
-                    case R.id.about:
-                        return true;
-                }
-                return false;
-            }
-        });
 
     }
     @Override

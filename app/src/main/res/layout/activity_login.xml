@@ -62,7 +62,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:text="@string/or_text"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <!--create account button-->
@@ -74,6 +74,16 @@
         android:text="@string/create_text"
         android:textColor="#A20C0C"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/forgotPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:text="@string/reset_password"
+        android:textColor="#1E88E5"
+        android:textSize="10sp" />
 
 </LinearLayout>
 

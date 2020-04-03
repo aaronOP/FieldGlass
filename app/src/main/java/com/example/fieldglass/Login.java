@@ -1,9 +1,5 @@
 package com.example.fieldglass;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,7 +26,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 
 import utilities.DetailsApi;
 
@@ -34,6 +33,7 @@ import utilities.DetailsApi;
 public class Login extends AppCompatActivity {
     private Button loginButton;
     private Button createAccButton;
+    private Button forgotPass;
 
     //username and password from xml
     private AutoCompleteTextView emailAddress;
@@ -64,6 +64,7 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.email_sign_in_button);
         createAccButton = findViewById(R.id.create_acc_button_login);
+        forgotPass = findViewById(R.id.forgotPass);
 
         //create account button activity
         createAccButton.setOnClickListener(new View.OnClickListener() {
@@ -82,15 +83,16 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Reset Password button
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity((new Intent(Login.this, resetPassword.class)));
+            }
+        });
+
+
     }
-
-
-
-
-
-
-
-
 
     private void loginEmailPasswordUser(String email, String pwd) {
 

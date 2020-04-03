@@ -2,7 +2,6 @@ package com.example.fieldglass;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +37,14 @@ public class MainHome extends AppCompatActivity {
     private TaskItemRecyclerAdapter taskItemRecyclerAdapter;
     private List<TaskItem> TaskItemList;
     FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
+
+    //Nav Bar
+    public void infoActivity(View view){
+        startActivity(new Intent(MainHome.this, About.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
+    public void mapsActivity(View view){
+        startActivity(new Intent(MainHome.this, Dashboard.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +77,7 @@ public class MainHome extends AppCompatActivity {
                                 Toast.makeText(MainHome.this, "User Role = " + global.user_role, Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            //Log.d(TAG, "Error getting documents: ", task.getException());
+
                         }
                     }
                 });
@@ -82,41 +88,9 @@ public class MainHome extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext()
-                        , New_Service.class));
+                startActivity(new Intent(MainHome.this, New_Service.class));
 
                 Toast.makeText(MainHome.this, "Clicked to add Service", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //Bottom Nav
-        // Initialize and assign variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        //set home selected
-        bottomNavigationView.setSelectedItemId(R.id.home);
-
-        //perform ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.maps:
-                        startActivity(new Intent(getApplicationContext()
-                                , MapsActivity.class));
-                        overridePendingTransition(0, 0 );
-                        return true;
-
-                    case R.id.home:
-                        return true;
-
-                    case R.id.about:
-                        startActivity(new Intent(getApplicationContext()
-                                , About.class));
-                        overridePendingTransition(0, 0 );
-                        return true;
-                }
-                return false;
             }
         });
     }
@@ -133,19 +107,20 @@ public class MainHome extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-
-                                TaskItem taskItem = document.toObject(TaskItem.class);
-                                TaskItemList.add(taskItem);
+                                String docID= document.getId();
+                                //TaskItem taskItem = document.toObject(TaskItem.class).(docID);
+                                Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
+                                //TaskItemList.add(taskItem);
                             }
 
                             taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
                             recyclerView.setAdapter(taskItemRecyclerAdapter);
                             taskItemRecyclerAdapter.notifyDataSetChanged();
                         } else {
-                            //Log.d(TAG, "Error getting documents: ", task.getException());
+
                         }
                     }
                 });
 
     }
-}
+    }

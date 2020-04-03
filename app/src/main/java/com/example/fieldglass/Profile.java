@@ -1,41 +1,35 @@
 package com.example.fieldglass;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.jar.Attributes;
 
 
 public class Profile extends AppCompatActivity {
 //    initialise fire store
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    //collection refernece
+    //collection reference
     private CollectionReference collectionReference = db.collection("Users");
 
 //    declare Widgets
@@ -74,7 +68,7 @@ public class Profile extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
+
                                 // retrieve data and store as strings
                                 String dbName = document.getString("username");
                                 String dbAddress = document.getString("address");
@@ -95,26 +89,23 @@ public class Profile extends AppCompatActivity {
                                 //Save Doc id
                                 global.userDocID = document.getId();
                                 global.user_role = dbRole;
+
+                                global.city = townInput.getText().toString().trim();
                             }
                         } else {
-                            //Log.d(TAG, "Error getting documents: ", task.getException());
-                            //Error Getting Data
-                            Toast.makeText(Profile.this,"Sit on my face", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Profile.this,"Error getting documents", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-
-
-        //get button
-
+        //find button
         Button save = findViewById(R.id.btnSave);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                        //get values
+        //get values
         String username = nameInput.getText().toString().trim();
         String email = emailInput.getText().toString().trim();
         String address = addressInput.getText().toString().trim();
@@ -123,7 +114,6 @@ public class Profile extends AppCompatActivity {
         String phone = phoneInput.getText().toString().trim();
 
         //save to fire store
-
         Map<String, Object> Users = new HashMap<>();
         Users.put("username", username);
         Users.put("address", address);
@@ -150,7 +140,7 @@ public class Profile extends AppCompatActivity {
         .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Profile.this, "This didnt Quite work, Update Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Profile.this, "This didn't Quite work, Update Failed", Toast.LENGTH_SHORT).show();
 
             }
         });

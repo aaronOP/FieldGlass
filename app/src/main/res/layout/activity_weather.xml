@@ -65,10 +65,10 @@
         app:layout_constraintTop_toBottomOf="@+id/weatherToolbar" />
 
     <Button
-        android:id="@+id/searchTown"
+        android:id="@+id/homeAddressButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="120dp"
         android:background="#B5D3E7"
         android:bottomLeftRadius="20dp"
         android:bottomRightRadius="20dp"
@@ -77,11 +77,11 @@
         android:padding="15dp"
         android:text="@string/find"
         android:textColor="#FFFFFF"
-        android:textSize="24dp"
+        android:textSize="18sp"
         android:topLeftRadius="20dp"
         android:topRightRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTown"
         app:rippleColor="#33AAAAAA"
@@ -99,6 +99,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchTown"
+        app:layout_constraintTop_toBottomOf="@+id/homeAddressButton"
         app:layout_constraintVertical_bias="0.215" />
+
+    <Button
+        android:id="@+id/searchAddressButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B5D3E7"
+        android:padding="15dp"
+        android:text="Search Address"
+        android:textColor="#FCFFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/homeAddressButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTown"
+        app:layout_constraintVertical_bias="0.56" />
 </androidx.constraintlayout.widget.ConstraintLayout>

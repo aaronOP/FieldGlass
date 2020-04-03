@@ -1,7 +1,5 @@
 package com.example.fieldglass;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,6 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,7 +28,7 @@ import java.net.URL;
 public class WeatherApp extends AppCompatActivity {
 
     TextView townName;
-    Button searchButton;
+    Button searchButton, homeButton;
     TextView result;
 
     class Forecast extends AsyncTask<String,Void,String>{
@@ -68,20 +68,31 @@ public class WeatherApp extends AppCompatActivity {
         }
     }
 
-    public void search(View view){
+    public void search(){
+
+        String SearchCriteria;
+        if (global.weatherSearch.equals("Home")){
+            //Search for home address
+            SearchCriteria = global.city;
+        }
+        else if (global.weatherSearch.equals("Search")){
+            //Search for enetered LOCATION
+            SearchCriteria = townName.getText().toString().trim();
+        }
+        else{
+            SearchCriteria = "";
+        }
 
         townName = findViewById(R.id.editTextTown);
-        searchButton = findViewById(R.id.searchTown);
+        searchButton = findViewById(R.id.homeAddressButton);
         result = findViewById(R.id.result);
-
-        String tName = townName.getText().toString();
 
         //Weather app taken from Youtube tutorial by "Learn Through Code"
         String content;
         Forecast forecast = new Forecast();
         try {
             content = forecast.execute("https://openweathermap.org/data/2.5/weather?q="
-                    + tName+"&appid=b6907d289e10d714a6e88b30761fae22").get();
+                    + SearchCriteria +"&appid=b6907d289e10d714a6e88b30761fae22").get();
             //Check data is returning or not
             Log.i( "content", content);
 
@@ -107,9 +118,6 @@ public class WeatherApp extends AppCompatActivity {
             JSONObject mainPart = new JSONObject(mainTemperature);
             temperature = mainPart.getString("temp");
             Log.i("Temperature",temperature);
-
-            //Log.i("main", main);
-            //Log.i("description", description);
 
             String resultText =
                     "Main: "+ main +
@@ -140,6 +148,32 @@ public class WeatherApp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
+        searchButton = findViewById(R.id.searchAddressButton);
+        homeButton = findViewById(R.id.homeAddressButton);
+
+        //TEST
+        Toast.makeText(WeatherApp.this, "Users City" + global.city, Toast.LENGTH_SHORT).show();
+
+
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                global.weatherSearch = "Home";
+                Toast.makeText(WeatherApp.this, global.weatherSearch, Toast.LENGTH_SHORT).show();
+                search();
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                global.weatherSearch = "Search";
+                Toast.makeText(WeatherApp.this, global.weatherSearch, Toast.LENGTH_SHORT).show();
+                search();
+            }
+        });
+
         //Floating action button to close new service
         FloatingActionButton fab = findViewById(R.id.fabE_btn);
 
@@ -151,6 +185,8 @@ public class WeatherApp extends AppCompatActivity {
                 Toast.makeText(WeatherApp.this, "Return to About", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
 
     }

@@ -1,9 +1,10 @@
 package com.example.fieldglass;
 
 public class TaskItem {
-     String Service;
-     String Date;
-     String Acre;
+    String docID;
+    String Service;
+    String Date;
+    String Acre;
 
     public TaskItem(){
         //empty constructor needed to prevent accidental deletion

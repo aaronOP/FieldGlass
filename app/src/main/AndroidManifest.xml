@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Select_Service"></activity>
+        <activity android:name=".resetPassword"></activity>
+        <activity android:name=".Order" />
+        <activity android:name=".Select_Service" />
         <activity android:name=".WeatherApp" />
         <activity android:name=".Calendar" />
         <activity android:name=".Comment" />

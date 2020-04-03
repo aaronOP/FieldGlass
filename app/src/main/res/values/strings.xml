@@ -45,7 +45,7 @@
     <string name="calendar">Calendar</string>
     <string name="weather">Weather</string>
     <string name="calender">CALENDER</string>
-    <string name="find">Find</string>
+    <string name="find">Home Address</string>
     <string name="enter_nearest_town">Enter Nearest Town</string>
     <string name="weathertxt">Weather</string>
     <string name="select_service">Select Service</string>
@@ -53,4 +53,10 @@
     <string name="bale_and_wrap">Bale and Wrap</string>
     <string name="acre">Acre Count</string>
     <string name="to_do">To Do</string>
+    <string name="acres">Acres</string>
+    <string name="create_your_account">Create your account</string>
+    <string name="reset_password">Forgot your password?</string>
+    <string name="send">Send</string>
+    <string name="example_domain_com">example@domain.com</string>
+    <string name="reset_your_password">Reset your Password</string>
 </resources>
