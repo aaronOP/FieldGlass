@@ -73,7 +73,6 @@
         android:bottomLeftRadius="20dp"
         android:bottomRightRadius="20dp"
         android:elevation="10dp"
-        android:onClick="search"
         android:padding="15dp"
         android:text="@string/find"
         android:textColor="#FFFFFF"

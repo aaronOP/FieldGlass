@@ -1,6 +1,7 @@
 package com.example.fieldglass;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,12 +14,24 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
 public class About extends AppCompatActivity {
+
+    //firebase
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference eventRef = db.collection("Dates").document("Big code demo");
+
+    FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private StorageReference storageReference;
+
 
     //Nav Bar
     public void homeActivity(View view){
@@ -28,29 +41,36 @@ public class About extends AppCompatActivity {
         startActivity(new Intent(About.this, Dashboard.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
+    //WebLinks
+    public void WebClicked(View view) {
+        Intent ExternalIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fieldglass.farm/"));
+        startActivity(ExternalIntent);
+    }
+
 
     //declare button for logout
     Button button;
 
-    //Fire base auth
-    FirebaseAuth mAuth;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private FirebaseFirestore db =  FirebaseFirestore.getInstance();
-    private StorageReference storageReference;
 
+
+    //Show events
+
+
+    //Test click
     public void cardviewClicked (View view){
+
         Toast.makeText(About.this, "Test clicked!",
                 Toast.LENGTH_LONG).show();
     }
 
-
+    //To profile page
     public void profileClicked(View view ) {
         Intent intent = new Intent(About.this, Profile.class);
         startActivity(intent);
+        Toast.makeText(About.this, "Profile Clicked",
+                Toast.LENGTH_SHORT).show();
     }
-
+    //To prices page
     public void pricesClicked(View view ) {
         Intent intent = new Intent(About.this, Prices.class);
         startActivity(intent);
@@ -58,10 +78,19 @@ public class About extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
+    //To weather page
     public void weatherClicked(View view ) {
         Intent intent = new Intent(About.this, WeatherApp.class);
         startActivity(intent);
         Toast.makeText(About.this, "WeatherApp Clicked",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    //To calendar page
+    public void CalendarClicked(View view ) {
+        Intent intent = new Intent(About.this, Calendar.class);
+        startActivity(intent);
+        Toast.makeText(About.this, "Calendar Clicked",
                 Toast.LENGTH_SHORT).show();
     }
 

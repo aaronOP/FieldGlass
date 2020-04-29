@@ -1,13 +1,16 @@
 package com.example.fieldglass;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Service;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import java.lang.reflect.ParameterizedType;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class Prices extends AppCompatActivity {
@@ -83,5 +86,18 @@ public class Prices extends AppCompatActivity {
         //create Price list adapter
         PriceListAdapter adapter = new PriceListAdapter(this, R.layout.adapter_view_layout, priceList);
         mListView.setAdapter(adapter);
+
+
+        //Floating action button to close prices
+        FloatingActionButton fab = findViewById(R.id.fabP);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext()
+                        , About.class));
+                Toast.makeText(Prices.this, "Return to About", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -1,11 +1,6 @@
 package com.example.fieldglass;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.gesture.GestureOverlayView;
-import android.location.Address;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -98,7 +96,7 @@ public class CreateAccount extends AppCompatActivity {
             if (!TextUtils.isEmpty(emailEditText.getText().toString())
                 && !TextUtils.isEmpty(passwordEditText.getText().toString())
                 && !TextUtils.isEmpty(userNameEditText.getText().toString())
-//                    new details
+                //new details
                 && !TextUtils.isEmpty(addressEditText.getText().toString())
                 && !TextUtils.isEmpty(cityEditText.getText().toString())
                 && !TextUtils.isEmpty(postEditText.getText().toString())
@@ -108,23 +106,24 @@ public class CreateAccount extends AppCompatActivity {
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 String username = userNameEditText.getText().toString().trim();
-//                new details
+                //new details
                 String address = addressEditText.getText().toString().trim();
                 String city = cityEditText.getText().toString().trim();
                 String post = postEditText.getText().toString().trim();
                 String phone = phoneEditText.getText().toString().trim();
+                // validating password with retype password
+                //&& password.length() > 6) {
 
                 createUserEmailAccount(email, password, username, address, city, post, phone);
             }else{//prevent empty entry
+                userNameEditText.requestFocus();
                 Toast.makeText(CreateAccount.this,
-                        "Empty Fields Not Allowed",
-                        Toast.LENGTH_LONG)
-                        .show();
+                        "Empty Fields Not Allowed", Toast.LENGTH_LONG).show();
             }
         }
     });
     //Login Button to return to login page
-        Button button = (Button) findViewById(R.id.login2);
+        Button button = findViewById(R.id.login2);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(CreateAccount.this, Login.class));

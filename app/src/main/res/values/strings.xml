@@ -31,7 +31,7 @@
     <string name="client">Client</string>
     <string name="add_service">New Service Sheet</string>
     <string name="service">Service</string>
-    <string name="machines">Machines</string>
+
     <string name="add_machines">+ Add Machines</string>
     <string name="add_a_client">+ Add a Client</string>
     <string name="add_comment">+ Add Comment</string>
@@ -59,4 +59,9 @@
     <string name="send">Send</string>
     <string name="example_domain_com">example@domain.com</string>
     <string name="reset_your_password">Reset your Password</string>
+    <string name="weather_updates">Weather Updates</string>
+    <string name="website">FieldGlass Web</string>
+    <string name="machines">Machines</string>
+    <string name="settings_icon">Settings Icon</string>
+    <string name="cost_calculator">Calculator</string>
 </resources>

@@ -32,8 +32,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-//import com.example.fieldglass.adapter.PlaceAutoSuggestAdapter;
-//new firebase import
 
 public class New_Service extends AppCompatActivity {
 
@@ -91,8 +89,6 @@ public class New_Service extends AppCompatActivity {
                 acreNum.setText(String.valueOf(new_acre));
             }
         });
-
-
 
         //Client
         db.collection("Users")

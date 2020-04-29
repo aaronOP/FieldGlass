@@ -76,7 +76,7 @@ public class WeatherApp extends AppCompatActivity {
             SearchCriteria = global.city;
         }
         else if (global.weatherSearch.equals("Search")){
-            //Search for enetered LOCATION
+            //Search for entered LOCATION
             SearchCriteria = townName.getText().toString().trim();
         }
         else{
@@ -91,10 +91,12 @@ public class WeatherApp extends AppCompatActivity {
         String content;
         Forecast forecast = new Forecast();
         try {
-            content = forecast.execute("https://openweathermap.org/data/2.5/weather?q="
-                    + SearchCriteria +"&appid=b6907d289e10d714a6e88b30761fae22").get();
+            content = forecast.execute("http://openweathermap.org/data/2.5/weather?q="
+                    + SearchCriteria +"&appid=f8bd724be8ff5fafe83e8b6c2d2ab2d4").get();
+
+
             //Check data is returning or not
-            Log.i( "content", content);
+            //Log.i( "content", content);
 
             //JSON
             JSONObject jsonObject = new JSONObject(content);
@@ -151,8 +153,8 @@ public class WeatherApp extends AppCompatActivity {
         searchButton = findViewById(R.id.searchAddressButton);
         homeButton = findViewById(R.id.homeAddressButton);
 
-        //TEST
-        Toast.makeText(WeatherApp.this, "Users City" + global.city, Toast.LENGTH_SHORT).show();
+        //TEST to check for users city global variable.
+        Toast.makeText(WeatherApp.this, "Users City " + global.city, Toast.LENGTH_SHORT).show();
 
 
 

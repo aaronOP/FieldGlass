@@ -108,9 +108,11 @@ public class MainHome extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                                 String docID= document.getId();
-                                //TaskItem taskItem = document.toObject(TaskItem.class).(docID);
-                                Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
-                                //TaskItemList.add(taskItem);
+                                TaskItem taskItem = document.toObject(TaskItem.class);
+                                        //.(docID);
+                                //Toast for docID
+                                //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
+                                TaskItemList.add(taskItem);
                             }
 
                             taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);

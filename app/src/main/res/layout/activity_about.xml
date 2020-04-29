@@ -59,17 +59,66 @@
             android:background="@drawable/greenback">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/Events"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Weather Updates"
+                android:text="Events"
                 android:textAllCaps="true"
-                android:textColor="#000000"
+                android:textColor="#1F1B1B"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="-2dp" />
+
+            <TextView
+                android:id="@+id/TVEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:text="Event Name:"
+                android:textColor="@color/colorAccent"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:text="Date:"
+                android:textColor="@color/colorAccent"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:text="Time:"
+                android:textColor="@color/colorAccent"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:text="Location:"
+                android:textColor="@color/colorAccent"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@+id/TVEvent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -261,7 +310,7 @@
                                 android:id="@+id/txtcalc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Cost Calculator"
+                                android:text="@string/cost_calculator"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="#FFFFFF"
@@ -312,6 +361,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
+                        android:onClick="CalendarClicked"
                         app:cardBackgroundColor="#6fb98f"
                         app:cardCornerRadius="25dp"
                         app:contentPadding="6dp">
@@ -412,6 +462,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
+                        android:onClick="WebClicked"
                         app:cardBackgroundColor="#ffd800"
                         app:cardCornerRadius="25dp"
                         app:contentPadding="6dp">
@@ -424,7 +475,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Website"
+                                android:text="@string/website"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="#FFFFFF"
@@ -460,7 +511,7 @@
                                 android:id="@+id/txtSetting"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Settings"
+                                android:text="@string/machines"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="#FFFFFF"
@@ -471,7 +522,7 @@
                                 android:id="@+id/setting"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:contentDescription="Settings Icon"
+                                android:contentDescription="@string/settings_icon"
                                 android:tint="#FFFFFF"
                                 app:srcCompat="@drawable/ic_settings" />
                         </LinearLayout>
@@ -499,7 +550,8 @@
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:onClick="mapsActivity"
-            app:srcCompat="@drawable/ic_map_black_24dp" />
+            app:srcCompat="@drawable/ic_map_black_24dp"
+            android:contentDescription="TODO" />
 
         <ImageButton
             android:id="@+id/imageButton2"
