@@ -164,7 +164,10 @@ public class CreateAccount extends AppCompatActivity {
                                 userObj.put("email", email);
                                 userObj.put("post", post);
                                 userObj.put("phone", phone);
-                                userObj.put("Role", "User");
+                                userObj.put("role", "User");
+
+                                global.user_role = "User";
+                                global.Dispalyname = userNameEditText.getText().toString().trim();
 
                                 //save to fire store db
                                 collectionReference.add(userObj)

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f9f9"
+    tools:context=".New_Machine">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/AddMachineToolBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#444947"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/displayHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Add Machine"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/AddMachineToolBar" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#444947"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_save" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="#f9f9f9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AddMachineToolBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TVMake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Manufacturer:"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextOrange" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <EditText
+                    android:id="@+id/TextViewMan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="+ Manufacturer"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="12dp"
+                    android:textColor="@color/ColorTextGreen"
+                    android:textColorHint="@color/ColorTextGreen" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/TVModel2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Model:"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextOrange" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/TextViewMod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="+ Model"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="12dp"
+                    android:textColor="@color/ColorTextGreen"
+                    android:textColorHint="@color/ColorTextGreen" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/TVYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Year:"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextOrange" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/TextViewYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="+ Year"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:padding="12dp"
+                    android:textColor="@color/ColorTextGreen"
+                    android:textColorHint="@color/ColorTextGreen"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/TVType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Type:"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextOrange" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioGroup
+                    android:id="@+id/RGTypeGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp">
+
+                    <RadioButton
+                        android:id="@+id/RBVehicle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vehicle" />
+
+                    <RadioButton
+                        android:id="@+id/RBImplement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Implement" />
+
+                    <RadioButton
+                        android:id="@+id/RBTrailer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Trailer" />
+                </RadioGroup>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/TVIssue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Issue Area:"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextOrange" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <RadioGroup
+                    android:id="@+id/RGProbGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp">
+
+                    <RadioButton
+                        android:id="@+id/RBEngine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Engine" />
+
+                    <RadioButton
+                        android:id="@+id/RBHydraulics"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hydraulics" />
+
+                    <RadioButton
+                        android:id="@+id/RBCooling"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cooling" />
+
+                    <RadioButton
+                        android:id="@+id/RBBody"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Body" />
+
+                    <RadioButton
+                        android:id="@+id/RBInterior"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Interior" />
+
+                    <RadioButton
+                        android:id="@+id/RBElectrical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Electrical" />
+
+                    <RadioButton
+                        android:id="@+id/RBOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Other(Please Specify)" />
+
+                </RadioGroup>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/TVComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="Comment:"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextOrange" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <EditText
+                    android:id="@+id/TVCom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/add_comment"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine|text"
+                    android:maxLines="10"
+                    android:padding="12dp"
+                    android:scrollbars="none"
+                    android:textColor="@color/ColorTextGreen"
+                    android:textColorHint="@color/ColorTextGreen"
+                    android:textSize="18sp"
+                    android:visibility="visible"
+                    tools:ignore="TextViewEdits" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,12 @@ package com.example.fieldglass;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainHome extends AppCompatActivity {
     //set firebase
@@ -38,6 +41,11 @@ public class MainHome extends AppCompatActivity {
     private List<TaskItem> TaskItemList;
     FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
 
+    //Cardview for managers eyes only
+    CardView CVTasks;
+    RadioButton RBAll;
+    RadioButton RBOwn;
+
     //Nav Bar
     public void infoActivity(View view){
         startActivity(new Intent(MainHome.this, About.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
@@ -51,9 +59,19 @@ public class MainHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
 
+        CVTasks = findViewById(R.id.CVTasks);
+
+        //Show/ hide cardview
+        if (Objects.equals(global.user_role, "Manager")) {
+            CVTasks.setVisibility(View.VISIBLE);
+        }
+        else {
+            CVTasks.setVisibility(View.INVISIBLE);
+            //Add code to show own data
+        }
+
         //Recycler View
         TaskItemList = new ArrayList<>();
-
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this ));
@@ -98,31 +116,67 @@ public class MainHome extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        db.collection("orders")
-                .whereEqualTo("clientId", user.getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String docID= document.getId();
-                                TaskItem taskItem = document.toObject(TaskItem.class);
-                                        //.(docID);
-                                //Toast for docID
-                                //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
-                                TaskItemList.add(taskItem);
+        //Show data based on radio buttons
+        RBAll = findViewById(R.id.RBAll);
+        RBOwn = findViewById(R.id.RBOwn);
+
+//        RBOwn.setChecked(true);
+
+        if (RBOwn.isChecked()) {
+            //users Own data
+            db.collection("orders")
+                    .whereEqualTo("clientId", user.getUid())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    //Log.d(TAG, document.getId() + " => " + document.getData());
+                                    String docID= document.getId();
+                                    TaskItem taskItem = document.toObject(TaskItem.class);
+                                    //.(docID);
+                                    //Toast for docID
+                                    //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
+                                    TaskItemList.add(taskItem);
+                                }
+
+                                taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
+                                recyclerView.setAdapter(taskItemRecyclerAdapter);
+                                taskItemRecyclerAdapter.notifyDataSetChanged();
+
+                            } else if (RBAll.isChecked()){
+                                //nothing
+                                db.collection("orders")
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        //Log.d(TAG, document.getId() + " => " + document.getData());
+                                                        String docID= document.getId();
+                                                        TaskItem taskItem = document.toObject(TaskItem.class);
+                                                        //.(docID);
+                                                        //Toast for docID
+                                                        //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
+                                                        TaskItemList.add(taskItem);
+
+                                                        taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
+                                                        recyclerView.setAdapter(taskItemRecyclerAdapter);
+                                                        taskItemRecyclerAdapter.notifyDataSetChanged();
+
+                                                    }
+
+
+                                                }
+                                                else {
+
+                                                }
                             }
-
-                            taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
-                            recyclerView.setAdapter(taskItemRecyclerAdapter);
-                            taskItemRecyclerAdapter.notifyDataSetChanged();
-                        } else {
-
-                        }
+                        });
                     }
-                });
-
+        }
+    });
     }
-    }
+ }}

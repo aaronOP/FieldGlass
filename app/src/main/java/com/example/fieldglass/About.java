@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,10 +51,8 @@ public class About extends AppCompatActivity {
 
     //declare button for logout
     Button button;
-
-
-
-    //Show events
+    //Show name
+    TextView TVNameEvent;
 
 
     //Test click
@@ -86,6 +85,28 @@ public class About extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
+    //To weather page
+    public void calcClicked(View view ) {
+        Intent intent = new Intent(About.this, Calculator.class);
+        startActivity(intent);
+        Toast.makeText(About.this, "Calculator Clicked",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    //To Machine page
+    public void machineClicked(View view ) {
+
+        if (global.user_role.equals("Manager")) {
+
+            Intent intent = new Intent(About.this, Machine.class);
+            startActivity(intent);
+            Toast.makeText(About.this, "Machines Clicked",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(About.this, "Managers Access only!",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
     //To calendar page
     public void CalendarClicked(View view ) {
         Intent intent = new Intent(About.this, Calendar.class);
@@ -98,6 +119,9 @@ public class About extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        //username
+        TVNameEvent = findViewById(R.id.TVNameEvent);
+        TVNameEvent.setText(global.Dispalyname + "'s" + " Events");
 
         //Get user city
         db.collection("Users")
@@ -128,8 +152,6 @@ public class About extends AppCompatActivity {
                         }
                     }
                 });
-
-
 
         //find logout button
         button = (Button) findViewById(R.id.LogoutBtn);

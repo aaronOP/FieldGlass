@@ -6,6 +6,7 @@ public class global {
     public static String loggedInID;
     public static String user_role;
     public static String orderDocID;
+    public static String Dispalyname;
 
     //Orders
     public static String user_Service;
@@ -28,6 +29,9 @@ public class global {
     //Weather app
     public static String city;
     public static String weatherSearch;
+
+    //Machines
+    public static String machType;
 
 
 

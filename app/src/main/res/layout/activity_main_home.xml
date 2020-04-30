@@ -44,13 +44,47 @@
     <!--        app:layout_constraintTop_toBottomOf="@+id/Hometoolbar" />-->
 
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CVTasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/Hometoolbar">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/RBAll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:text="All Tasks" />
+
+            <RadioButton
+                android:id="@+id/RBOwn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Tasks" />
+
+        </RadioGroup>
+
+    </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintTop_toBottomOf="@+id/Hometoolbar"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Hometoolbar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_btn"
@@ -87,7 +121,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/holo_green_light"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 

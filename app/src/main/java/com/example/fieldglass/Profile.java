@@ -124,6 +124,8 @@ public class Profile extends AppCompatActivity {
         Users.put("userId", userid);
         Users.put("role", global.user_role);
 
+        global.Dispalyname = nameInput.getText().toString().trim();
+
 
             db.collection("Users").document(global.userDocID)
             .set(Users)//merge options

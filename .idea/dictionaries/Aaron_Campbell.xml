@@ -5,12 +5,14 @@
       <w>bgcalbtn</w>
       <w>cardview</w>
       <w>combi</w>
+      <w>dispalyname</w>
       <w>documentid</w>
       <w>eventsobj</w>
       <w>firebase</w>
       <w>firestore</w>
       <w>greybck</w>
       <w>hometoolbar</w>
+      <w>machinetoolbar</w>
       <w>saveevent</w>
       <w>servicebar</w>
       <w>tedding</w>
