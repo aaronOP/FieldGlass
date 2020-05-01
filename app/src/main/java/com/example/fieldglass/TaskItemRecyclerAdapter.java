@@ -22,7 +22,6 @@ public class TaskItemRecyclerAdapter extends RecyclerView.Adapter<TaskItemRecycl
 
         this.context=context;
         TaskItemList=taskItemList;
-
     }
 
     @NonNull
@@ -39,7 +38,8 @@ public class TaskItemRecyclerAdapter extends RecyclerView.Adapter<TaskItemRecycl
 
        viewHolder.textservice.setText(taskItem.getService());
        viewHolder.textacre.setText(taskItem.getAcre());
-       viewHolder.textdate.setText(taskItem.getDate());
+       //viewHolder.textDocId.setText(taskItem.getDocID());
+       viewHolder.textclient.setText(taskItem.getClient());
 
        //Clickable recycler view
 
@@ -72,6 +72,8 @@ public class TaskItemRecyclerAdapter extends RecyclerView.Adapter<TaskItemRecycl
         public TextView textservice;
         public TextView textdate;
         public TextView textacre;
+        public TextView textclient;
+        public TextView textDocId;
 
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
@@ -80,8 +82,8 @@ public class TaskItemRecyclerAdapter extends RecyclerView.Adapter<TaskItemRecycl
 
             textservice = itemView.findViewById(R.id.text_view_service);
             textacre = itemView.findViewById(R.id.text_view_acre);
-            textdate = itemView.findViewById(R.id.text_view_date);
-                    }
+            textclient = itemView.findViewById(R.id.text_view_date);
+            }
 
     }
 

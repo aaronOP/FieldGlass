@@ -60,15 +60,11 @@ public class MainHome extends AppCompatActivity {
         setContentView(R.layout.activity_main_home);
 
         CVTasks = findViewById(R.id.CVTasks);
+        //Show data based on radio buttons
+        RBAll = findViewById(R.id.RBAll);
 
-        //Show/ hide cardview
-        if (Objects.equals(global.user_role, "Manager")) {
-            CVTasks.setVisibility(View.VISIBLE);
-        }
-        else {
-            CVTasks.setVisibility(View.INVISIBLE);
-            //Add code to show own data
-        }
+        RBOwn = findViewById(R.id.RBOwn);
+
 
         //Recycler View
         TaskItemList = new ArrayList<>();
@@ -76,29 +72,7 @@ public class MainHome extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this ));
 
-        //Firebase User
-        FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
 
-        //Check User Role
-        db.collection("Users")
-                .whereEqualTo("userId", user.getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String role = document.getString("role");
-                                    global.user_role = role;
-                                    //for user roles, in the on create set above line to visible for managers.
-                                Toast.makeText(MainHome.this, "User Role = " + global.user_role, Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-
-                        }
-                    }
-                });
 
         //Create Service button
         FloatingActionButton fab = findViewById(R.id.fab_btn);
@@ -111,72 +85,163 @@ public class MainHome extends AppCompatActivity {
                 Toast.makeText(MainHome.this, "Clicked to add Service", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        //Show data based on radio buttons
-        RBAll = findViewById(R.id.RBAll);
-        RBOwn = findViewById(R.id.RBOwn);
-
-//        RBOwn.setChecked(true);
-
-        if (RBOwn.isChecked()) {
-            //users Own data
-            db.collection("orders")
-                    .whereEqualTo("clientId", user.getUid())
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    //Log.d(TAG, document.getId() + " => " + document.getData());
-                                    String docID= document.getId();
-                                    TaskItem taskItem = document.toObject(TaskItem.class);
-                                    //.(docID);
-                                    //Toast for docID
-                                    //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
-                                    TaskItemList.add(taskItem);
+        //Show users tasks
+        RBOwn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Load Data
+                Toast.makeText(MainHome.this, "Own data", Toast.LENGTH_SHORT).show();
+                //users Own data
+                db.collection("orders")
+                        .whereEqualTo("clientId", user.getUid())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    TaskItemList.clear();
                                 }
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        //Log.d(TAG, document.getId() + " => " + document.getData());
+                                        String docID= document.getId();
+                                        TaskItem taskItem = document.toObject(TaskItem.class);
+                                        //.(docID);
+                                        //Toast for docID
+                                        //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
+                                        TaskItemList.add(taskItem);
+                                    }
 
-                                taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
-                                recyclerView.setAdapter(taskItemRecyclerAdapter);
-                                taskItemRecyclerAdapter.notifyDataSetChanged();
+                                    taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
+                                    recyclerView.setAdapter(taskItemRecyclerAdapter);
+                                    taskItemRecyclerAdapter.notifyDataSetChanged();
 
-                            } else if (RBAll.isChecked()){
-                                //nothing
-                                db.collection("orders")
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                                        //Log.d(TAG, document.getId() + " => " + document.getData());
-                                                        String docID= document.getId();
-                                                        TaskItem taskItem = document.toObject(TaskItem.class);
-                                                        //.(docID);
-                                                        //Toast for docID
-                                                        //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
-                                                        TaskItemList.add(taskItem);
+            }
+        });
 
-                                                        taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
-                                                        recyclerView.setAdapter(taskItemRecyclerAdapter);
-                                                        taskItemRecyclerAdapter.notifyDataSetChanged();
+       //Show all tasks
+                RBAll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //query for All data
+                        Toast.makeText(MainHome.this, "All Data", Toast.LENGTH_SHORT).show();
+                        db.collection("orders")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            TaskItemList.clear();
+                                        }
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            //Log.d(TAG, document.getId() + " => " + document.getData());
+                                            String docID = document.getId();
+                                            TaskItem taskItem = document.toObject(TaskItem.class);
+                                            //.docID;
+                                            //Toast for docID
+                                            //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
+                                            TaskItemList.add(taskItem);
 
-                                                    }
+                                        }
+                                        taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
+                                        recyclerView.setAdapter(taskItemRecyclerAdapter);
+                                        taskItemRecyclerAdapter.notifyDataSetChanged();
+                                    }
+                                });
+                    }
+                });
+            }
+        });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Check User Role
+        db.collection("Users")
+                .whereEqualTo("userId", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String role = document.getString("role");
+                                global.user_role = role;
+                                //for user roles, in the on create set above line to visible for managers.
+                                Toast.makeText(MainHome.this, "User Role = " + global.user_role, Toast.LENGTH_SHORT).show();
+                            }
+
+                            CVTasks = findViewById(R.id.CVTasks);
+                            //Show data based on radio buttons
+                            RBAll = findViewById(R.id.RBAll);
+                            RBOwn = findViewById(R.id.RBOwn);
+
+                            //Show/ hide cardview
+                            if (Objects.equals(global.user_role, "Manager")) {
+                                CVTasks.setVisibility(View.VISIBLE);
+                                RBAll.setChecked(true);
+
+                            }
+                            else {
+                                CVTasks.setVisibility(View.INVISIBLE);
+
+                                //Add code to show own data
+                            }
 
 
-                                                }
-                                                else {
+                        }
+                    }
+                });
 
-                                                }
+
+                //all orders
+        db.collection("orders")
+                .whereEqualTo("clientId", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            TaskItemList.clear();
+                        }
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            //Log.d(TAG, document.getId() + " => " + document.getData());
+                            String docID= document.getId();
+                            TaskItem taskItem = document.toObject(TaskItem.class);
+                            //.(docID);
+                            //Toast for docID
+                            //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
+                            TaskItemList.add(taskItem);
+                        }
+
+                        taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
+                        recyclerView.setAdapter(taskItemRecyclerAdapter);
+                        taskItemRecyclerAdapter.notifyDataSetChanged();
+//                db.collection("orders")
+//                        .get()
+//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                if (task.isSuccessful()) {
+//                                    TaskItemList.clear();
+//                                }
+//                                for (QueryDocumentSnapshot document : task.getResult()) {
+//                                    //Log.d(TAG, document.getId() + " => " + document.getData());
+//                                    String docID = document.getId();
+//                                    TaskItem taskItem = document.toObject(TaskItem.class);
+//                                    //.(docID);
+//                                    //Toast for docID
+//                                    //Toast.makeText(MainHome.this, docID, Toast.LENGTH_SHORT).show();
+//                                    TaskItemList.add(taskItem);
+//
+//                                }
+//                                taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
+//                                recyclerView.setAdapter(taskItemRecyclerAdapter);
+//                                taskItemRecyclerAdapter.notifyDataSetChanged();
                             }
                         });
-                    }
-        }
-    });
+
+
     }
- }}
+}

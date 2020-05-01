@@ -37,8 +37,6 @@ public class About extends AppCompatActivity {
 
     //firebase
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-//    private DocumentReference eventRef = db.collection("Dates");
-//    //.document("Big code demo");
 
     FirebaseAuth mAuth;
     private FirebaseAuth firebaseAuth;
