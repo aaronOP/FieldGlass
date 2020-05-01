@@ -3,29 +3,42 @@ package com.example.fieldglass;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fieldglass.models.EventModel;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
 public class About extends AppCompatActivity {
 
+    //Recyclerview
+    private RecyclerView mfirestoreEvent;
+    private FirebaseFirestore firebaseFirestore;
+    private FirestoreRecyclerAdapter adapter;
+
     //firebase
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference eventRef = db.collection("Dates").document("Big code demo");
+//    private DocumentReference eventRef = db.collection("Dates");
+//    //.document("Big code demo");
 
     FirebaseAuth mAuth;
     private FirebaseAuth firebaseAuth;
@@ -174,10 +187,74 @@ public class About extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
+        //Recycler view for events
+        firebaseAuth = FirebaseAuth.getInstance();
+        mfirestoreEvent = findViewById(R.id.firestoreEvent);
 
+        //Query
+        Query query = db.collection("Dates");
+
+        //Recycler options
+
+        FirestoreRecyclerOptions<EventModel> options = new FirestoreRecyclerOptions.Builder<EventModel>()
+                .setQuery(query, EventModel.class)
+                .build();
+
+        //Recycler adapter
+        adapter = new FirestoreRecyclerAdapter<EventModel, EventViewHolder>(options) {
+            @NonNull
+            @Override
+            public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_event, parent, false);
+                return new EventViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull EventViewHolder eventViewHolder, int i, @NonNull EventModel eventModel) {
+                eventViewHolder.list_date.setText(eventModel.getDate());
+                eventViewHolder.list_event.setText(eventModel.getEvent());
+                eventViewHolder.list_location.setText(eventModel.getLocation());
+                eventViewHolder.list_time.setText(eventModel.getTime());
+            }
+        };
+
+        //Viewholder class
+        //firestore list
+        mfirestoreEvent.setHasFixedSize(true);
+        mfirestoreEvent.setLayoutManager(new LinearLayoutManager(this));
+        mfirestoreEvent.setAdapter(adapter);
     }
+
+    private class EventViewHolder extends RecyclerView.ViewHolder {
+
+
+        private TextView list_date;
+        private TextView list_location;
+        private TextView list_time;
+        private TextView list_event;
+
+        public EventViewHolder(@NonNull View itemView) {
+            super(itemView);
+            //get from item view
+            list_event = itemView.findViewById(R.id.list_event);
+            list_date = itemView.findViewById(R.id.list_date);
+            list_location = itemView.findViewById(R.id.list_location);
+            list_time = itemView.findViewById(R.id.list_time);
+        }
+    }
+
+    @Override
+    protected void  onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
+        adapter.startListening();
     }
+
 }
+
+
