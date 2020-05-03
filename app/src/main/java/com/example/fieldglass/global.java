@@ -35,6 +35,7 @@ public class global {
 
     //Orders
     public static String ODocID;
+    public static String UserID;
 
 
 

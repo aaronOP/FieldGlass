@@ -1,7 +1,6 @@
 package com.example.fieldglass;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +55,8 @@ public class TaskItemRecyclerAdapter extends RecyclerView.Adapter<TaskItemRecycl
 
                 //Move order to new activity
                 TaskItemList.clear();
-                Intent intent = new Intent(context, Order.class);
-                context.startActivity(intent);
+//                Intent intent = new Intent(context, Order.class);
+//                context.startActivity(intent);
             }
         });
 

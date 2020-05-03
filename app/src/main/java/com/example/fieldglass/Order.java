@@ -22,6 +22,7 @@ public class Order extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference orderRef = db.collection("orders");
+//    private DocumentReference DocRef = db.document("clientId");
     private OrderAdapter adapter;
 
     @Override
@@ -45,7 +46,8 @@ public class Order extends AppCompatActivity {
     }
 
     private void startOrderRecycler(){
-        Query query = orderRef.orderBy("date", Query.Direction.DESCENDING);
+        //.whereEqualTo("clientId", user.getUid())
+        Query query = orderRef.whereEqualTo("clientId", global.UserID).orderBy("date", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<Archive> options = new FirestoreRecyclerOptions.Builder<Archive>()
                 .setQuery(query, Archive.class)

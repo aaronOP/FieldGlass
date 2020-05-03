@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -59,6 +60,8 @@ public class MainHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
 
+        global.UserID = user.getUid();
+
         CVTasks = findViewById(R.id.CVTasks);
         //Show data based on radio buttons
         RBAll = findViewById(R.id.RBAll);
@@ -92,7 +95,7 @@ public class MainHome extends AppCompatActivity {
                 Toast.makeText(MainHome.this, "Own data", Toast.LENGTH_SHORT).show();
                 //users Own data
                 db.collection("orders")
-                        .whereEqualTo("clientId", user.getUid())
+                        .whereEqualTo("clientId", user.getUid()).orderBy("date", Query.Direction.DESCENDING)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -113,6 +116,7 @@ public class MainHome extends AppCompatActivity {
                                     taskItemRecyclerAdapter = new TaskItemRecyclerAdapter(getApplicationContext(), TaskItemList);
                                     recyclerView.setAdapter(taskItemRecyclerAdapter);
                                     taskItemRecyclerAdapter.notifyDataSetChanged();
+
 
             }
         });
