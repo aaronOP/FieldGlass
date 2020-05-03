@@ -79,6 +79,7 @@ public class Order extends AppCompatActivity {
             public void onItemClick(DocumentSnapshot documentSnapshot, int i) {
                 Archive archive = documentSnapshot.toObject(Archive.class);
                 String id = documentSnapshot.getId();
+                global.ODocID = documentSnapshot.getId();
                 //String path = documentSnapshot.getReference().getPath();
                 Toast.makeText(Order.this, "Index " + i + "ID " + id, Toast.LENGTH_SHORT).show();
 

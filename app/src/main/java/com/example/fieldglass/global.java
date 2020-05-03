@@ -33,6 +33,9 @@ public class global {
     //Machines
     public static String machType;
 
+    //Orders
+    public static String ODocID;
+
 
 
 }

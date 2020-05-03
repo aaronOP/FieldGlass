@@ -1,10 +1,14 @@
 package com.example.fieldglass;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +46,8 @@ public class Order_Update extends AppCompatActivity {
     FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
 
     private static final String TAG = "New_Service";
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
     private EditText tvTask;
     private TextView tvClient;
     private EditText tvAddress;
@@ -52,25 +59,77 @@ public class Order_Update extends AppCompatActivity {
     private Button btnAddition;
     private String AcreValue;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order__update);
+
+        //plus minus button for acre
+        //Acre Counter
+        btnAddition = findViewById(R.id.btnAddition);
+        btnMinus = findViewById(R.id.btnMinus);
+        acreNum = findViewById(R.id.acreNum);
+
+        btnAddition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int new_acre = Integer.parseInt(acreNum.getText().toString().trim());
+                new_acre +=1;
+                acreNum.setText(String.valueOf(new_acre));
+            }
+        });
+
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int new_acre = Integer.parseInt(acreNum.getText().toString().trim());
+                new_acre -=1;
+                acreNum.setText(String.valueOf(new_acre));
+            }
+        });
+
+        mDisplayDate = findViewById(R.id.tvDate);
+        //create calender object to get current day, month, year
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                java.util.Calendar cal = java.util.Calendar.getInstance();
+                int year = cal.get(java.util.Calendar.YEAR);
+                int month = cal.get(java.util.Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        Order_Update.this, android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        //Initialise onDate set listenerObject
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG,"OnDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year );
+                String date = month + "/" + day + "/" + year;
+                mDisplayDate.setText(date);
+            }
+        };
 
         //retrieve doc id
         Intent intent = getIntent();
 
         String docID = intent.getStringExtra("Doc ID");
 
-
-        //String docID = getIntent().getExtras().getString("Doc ID","id");
         //show doc ID
         Toast.makeText(Order_Update.this,"OrderUpdate ID " + docID, Toast.LENGTH_SHORT).show();
 
         //Get Document data
         DocumentReference docRef = db.collection("orders")
-                .document("docID");
+                .document(global.ODocID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -147,7 +206,7 @@ public class Order_Update extends AppCompatActivity {
 
                     Toast.makeText(Order_Update.this, "Service Accepted", Toast.LENGTH_SHORT).show();
 
-                    db.collection("orders").document("docID")
+                    db.collection("orders").document(global.ODocID)
                             .set(orders)//merge options
                             .addOnSuccessListener((new OnSuccessListener<Void>() {
                                 @Override
