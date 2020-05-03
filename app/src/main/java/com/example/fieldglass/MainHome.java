@@ -72,8 +72,6 @@ public class MainHome extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this ));
 
-
-
         //Create Service button
         FloatingActionButton fab = findViewById(R.id.fab_btn);
 

@@ -48,4 +48,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MachineRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Machinetoolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

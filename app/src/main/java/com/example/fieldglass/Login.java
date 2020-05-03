@@ -90,8 +90,6 @@ public class Login extends AppCompatActivity {
                 startActivity((new Intent(Login.this, resetPassword.class)));
             }
         });
-
-
     }
 
     private void loginEmailPasswordUser(String email, String pwd) {
@@ -158,5 +156,4 @@ public class Login extends AppCompatActivity {
             .show();
         }
     }
-
 }

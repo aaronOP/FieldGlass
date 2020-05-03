@@ -20,9 +20,6 @@ public class Calculator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
-        //Calculator
-
-
         //Floating action button to close Calculator
         FloatingActionButton fab = findViewById(R.id.fabCalc);
 

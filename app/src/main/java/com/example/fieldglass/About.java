@@ -104,6 +104,14 @@ public class About extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
+    //To Order page
+    public void orderClicked(View view ) {
+        Intent intent = new Intent(About.this, Order.class);
+        startActivity(intent);
+        Toast.makeText(About.this, "Order Clicked",
+                Toast.LENGTH_SHORT).show();
+    }
+
     //To Machine page
     public void machineClicked(View view ) {
 
@@ -132,7 +140,7 @@ public class About extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         //username
         TVNameEvent = findViewById(R.id.TVNameEvent);
-        TVNameEvent.setText(global.Dispalyname + "'s" + " Events");
+        TVNameEvent.setText(global.Dispalyname + "'s" + " noticeboard");
 
         //Get user city
         db.collection("Users")

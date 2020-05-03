@@ -62,7 +62,7 @@
                 android:id="@+id/TVNameEvent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Events"
+                android:text="Notice"
                 android:textAllCaps="true"
                 android:textColor="#1F1B1B"
                 android:textSize="20sp"
@@ -162,6 +162,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
+                        android:onClick="orderClicked"
                         app:cardBackgroundColor="#004445"
                         app:cardCornerRadius="25dp"
                         app:contentPadding="6dp">

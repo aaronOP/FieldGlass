@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Calculator"></activity>
+        <activity android:name=".Order_Update"></activity>
+        <activity android:name=".Calculator" />
         <activity android:name=".New_Machine" />
         <activity android:name=".Machine" />
         <activity android:name=".resetPassword" />
